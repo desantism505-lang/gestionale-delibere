@@ -3,232 +3,253 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gestionale Delibere — Cassa del Notariato</title>
+<title>FSBOARD — Gestionale Delibere</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --blue: #1a56db;
-    --blue-light: #e8f0fe;
-    --blue-mid: #3b82f6;
-    --navy: #1e3a5f;
-    --green: #16a34a;
-    --green-light: #dcfce7;
-    --red: #dc2626;
-    --red-light: #fee2e2;
+    --fs-red: #E2001A;
+    --fs-red-dark: #B8001A;
+    --fs-red-light: #fce8ea;
+    --fs-red-mid: #f5c0c5;
+    --navy: #1a1a2e;
+    --navy-light: #16213e;
+    --gray-50: #f8f9fa;
+    --gray-100: #f1f3f5;
+    --gray-200: #e9ecef;
+    --gray-300: #dee2e6;
+    --gray-400: #adb5bd;
+    --gray-500: #6c757d;
+    --gray-600: #495057;
+    --gray-800: #212529;
+    --white: #ffffff;
+    --green: #2d9b57;
+    --green-light: #d4f0e1;
     --amber: #d97706;
     --amber-light: #fef3c7;
-    --gray-50: #f8fafc;
-    --gray-100: #f1f5f9;
-    --gray-200: #e2e8f0;
-    --gray-400: #94a3b8;
-    --gray-600: #475569;
-    --gray-800: #1e293b;
-    --white: #ffffff;
-    --radius: 8px;
-    --radius-lg: 12px;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
-    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.05);
+    --radius: 6px;
+    --radius-lg: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--gray-50); color: var(--gray-800); min-height: 100vh; }
-  
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--gray-100); color: var(--gray-800); min-height: 100vh; }
+
   /* LAYOUT */
   .layout { display: flex; min-height: 100vh; }
-  .sidebar { width: 240px; background: var(--navy); color: white; display: flex; flex-direction: column; flex-shrink: 0; position: fixed; height: 100vh; z-index: 100; }
-  .sidebar-logo { padding: 24px 20px 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-  .sidebar-logo h1 { font-size: 13px; font-weight: 600; color: white; letter-spacing: 0.5px; text-transform: uppercase; }
-  .sidebar-logo p { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
-  .sidebar-nav { padding: 12px 0; flex: 1; overflow-y: auto; }
-  .nav-section { padding: 8px 16px 4px; font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 1px; }
-  .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 16px; cursor: pointer; font-size: 13.5px; color: rgba(255,255,255,0.7); transition: all 0.15s; border-left: 3px solid transparent; }
-  .nav-item:hover { background: rgba(255,255,255,0.07); color: white; }
-  .nav-item.active { background: rgba(255,255,255,0.12); color: white; border-left-color: #60a5fa; }
-  .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
-  .main { margin-left: 240px; flex: 1; display: flex; flex-direction: column; }
-  .topbar { background: white; border-bottom: 1px solid var(--gray-200); padding: 0 32px; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
-  .topbar-title { font-size: 16px; font-weight: 600; color: var(--gray-800); }
+  .sidebar { width: 260px; background: var(--navy); display: flex; flex-direction: column; flex-shrink: 0; position: fixed; height: 100vh; z-index: 100; }
+  
+  .sidebar-logo { padding: 0 0 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .logo-bar { background: var(--fs-red); padding: 20px 24px 16px; }
+  .logo-brand { font-size: 26px; font-weight: 900; color: white; letter-spacing: -1px; line-height: 1; }
+  .logo-sub { font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: 2px; text-transform: uppercase; margin-top: 3px; }
+  .logo-placeholder { width: 48px; height: 48px; background: white; border-radius: 4px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+  .logo-placeholder span { font-size: 22px; font-weight: 900; color: var(--fs-red); letter-spacing: -1px; }
+
+  .sidebar-nav { padding: 16px 0; flex: 1; overflow-y: auto; }
+  .nav-section { padding: 10px 20px 5px; font-size: 9.5px; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1.5px; }
+  .nav-item { display: flex; align-items: center; gap: 11px; padding: 10px 20px; cursor: pointer; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.6); transition: all 0.15s; border-left: 3px solid transparent; margin: 1px 0; }
+  .nav-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.9); }
+  .nav-item.active { background: rgba(226,0,26,0.15); color: white; border-left-color: var(--fs-red); }
+  .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.7; }
+  .nav-item.active svg { opacity: 1; }
+
+  .sidebar-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .sidebar-footer-text { font-size: 11px; color: rgba(255,255,255,0.25); }
+
+  .main { margin-left: 260px; flex: 1; display: flex; flex-direction: column; }
+  .topbar { background: white; border-bottom: 1px solid var(--gray-200); padding: 0 32px; height: 58px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; box-shadow: var(--shadow); }
+  .topbar-left { display: flex; align-items: center; gap: 12px; }
+  .topbar-eyebrow { font-size: 11px; font-weight: 600; color: var(--fs-red); text-transform: uppercase; letter-spacing: 1px; }
+  .topbar-title { font-size: 17px; font-weight: 700; color: var(--gray-800); }
   .topbar-actions { display: flex; gap: 10px; align-items: center; }
   .content { padding: 28px 32px; flex: 1; }
 
   /* BUTTONS */
-  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: var(--radius); font-size: 13.5px; font-weight: 500; cursor: pointer; border: none; transition: all 0.15s; }
-  .btn-primary { background: var(--blue); color: white; }
-  .btn-primary:hover { background: #1d4ed8; }
-  .btn-secondary { background: white; color: var(--gray-800); border: 1px solid var(--gray-200); }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: var(--radius); font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; font-family: inherit; }
+  .btn-primary { background: var(--fs-red); color: white; }
+  .btn-primary:hover { background: var(--fs-red-dark); }
+  .btn-secondary { background: white; color: var(--gray-800); border: 1px solid var(--gray-300); }
   .btn-secondary:hover { background: var(--gray-50); }
-  .btn-sm { padding: 5px 11px; font-size: 12.5px; }
-  .btn-danger { background: var(--red-light); color: var(--red); border: 1px solid #fca5a5; }
-  .btn-danger:hover { background: #fecaca; }
-  .btn svg { width: 15px; height: 15px; }
+  .btn-sm { padding: 6px 12px; font-size: 12px; }
+  .btn-danger { background: var(--fs-red-light); color: var(--fs-red); border: 1px solid var(--fs-red-mid); }
+  .btn-danger:hover { background: var(--fs-red-mid); }
+  .btn-ghost { background: transparent; color: var(--gray-500); border: 1px solid var(--gray-200); }
+  .btn-ghost:hover { background: var(--gray-100); }
+  .btn svg { width: 14px; height: 14px; }
 
   /* CARDS */
   .card { background: white; border-radius: var(--radius-lg); border: 1px solid var(--gray-200); box-shadow: var(--shadow); }
-  .card-header { padding: 18px 20px 14px; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; justify-content: space-between; }
-  .card-title { font-size: 14px; font-weight: 600; color: var(--gray-800); }
+  .card-header { padding: 16px 20px 14px; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; justify-content: space-between; }
+  .card-title { font-size: 13.5px; font-weight: 700; color: var(--gray-800); text-transform: uppercase; letter-spacing: 0.3px; }
   .card-body { padding: 20px; }
 
   /* STATS */
   .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
-  .stat-card { background: white; border-radius: var(--radius-lg); border: 1px solid var(--gray-200); padding: 20px; box-shadow: var(--shadow); }
-  .stat-label { font-size: 12px; color: var(--gray-600); font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-  .stat-value { font-size: 28px; font-weight: 700; color: var(--gray-800); line-height: 1; }
-  .stat-sub { font-size: 12px; color: var(--gray-400); margin-top: 4px; }
+  .stat-card { background: white; border-radius: var(--radius-lg); border: 1px solid var(--gray-200); padding: 20px 22px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+  .stat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--fs-red); border-radius: 4px 0 0 4px; }
+  .stat-label { font-size: 11px; color: var(--gray-500); font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.8px; }
+  .stat-value { font-size: 32px; font-weight: 800; color: var(--gray-800); line-height: 1; letter-spacing: -1px; }
+  .stat-sub { font-size: 12px; color: var(--gray-400); margin-top: 6px; font-weight: 500; }
 
   /* BADGES */
-  .badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 20px; font-size: 11.5px; font-weight: 500; }
-  .badge-green { background: var(--green-light); color: #15803d; }
-  .badge-red { background: var(--red-light); color: #b91c1c; }
+  .badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; }
+  .badge-green { background: var(--green-light); color: #1a6b3a; }
+  .badge-red { background: var(--fs-red-light); color: var(--fs-red-dark); }
   .badge-amber { background: var(--amber-light); color: #92400e; }
-  .badge-blue { background: var(--blue-light); color: #1d4ed8; }
+  .badge-blue { background: #e0f0ff; color: #1a5fa8; }
   .badge-gray { background: var(--gray-100); color: var(--gray-600); }
-
-  /* ORGANO BADGE */
-  .organo-cda { background: #ede9fe; color: #6d28d9; }
-  .organo-assemblea { background: #e0f2fe; color: #0369a1; }
-  .organo-collegio { background: #fce7f3; color: #be185d; }
-  .organo-comitato { background: #f0fdf4; color: #166534; }
+  .organo-cda { background: #ede9fe; color: #5b21b6; }
+  .organo-assemblea { background: #e0f2fe; color: #075985; }
+  .organo-collegio { background: #fce7f3; color: #9d174d; }
+  .organo-comitato { background: #d1fae5; color: #065f46; }
 
   /* TABLE */
   .table-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-  th { background: var(--gray-50); padding: 10px 14px; text-align: left; font-size: 12px; font-weight: 600; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--gray-200); }
-  td { padding: 12px 14px; border-bottom: 1px solid var(--gray-100); vertical-align: middle; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--gray-50); padding: 10px 16px; text-align: left; font-size: 10.5px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 2px solid var(--gray-200); }
+  td { padding: 13px 16px; border-bottom: 1px solid var(--gray-100); vertical-align: middle; }
   tr:last-child td { border-bottom: none; }
-  tr:hover td { background: var(--gray-50); }
+  tr:hover td { background: #fff8f8; }
 
   /* FORMS */
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
   .form-group { display: flex; flex-direction: column; gap: 5px; }
   .form-group.full { grid-column: 1 / -1; }
-  label { font-size: 12.5px; font-weight: 600; color: var(--gray-600); }
-  input, select, textarea { padding: 8px 12px; border: 1px solid var(--gray-200); border-radius: var(--radius); font-size: 13.5px; font-family: inherit; background: white; color: var(--gray-800); width: 100%; transition: border-color 0.15s; }
-  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--blue-mid); box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+  label { font-size: 11.5px; font-weight: 700; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.5px; }
+  input, select, textarea { padding: 9px 12px; border: 1px solid var(--gray-300); border-radius: var(--radius); font-size: 13.5px; font-family: inherit; background: white; color: var(--gray-800); width: 100%; transition: border-color 0.15s; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--fs-red); box-shadow: 0 0 0 3px rgba(226,0,26,0.08); }
   textarea { resize: vertical; min-height: 80px; }
 
   /* MODAL */
-  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; }
-  .modal { background: white; border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(0,0,0,0.15); width: 100%; max-width: 680px; max-height: 90vh; overflow-y: auto; }
-  .modal-header { padding: 20px 24px 16px; border-bottom: 1px solid var(--gray-100); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: white; z-index: 1; }
-  .modal-title { font-size: 16px; font-weight: 600; }
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .modal { background: white; border-radius: var(--radius-lg); box-shadow: 0 20px 60px rgba(0,0,0,0.2); width: 100%; max-width: 700px; max-height: 90vh; overflow-y: auto; }
+  .modal-header { padding: 20px 24px 16px; border-bottom: 2px solid var(--fs-red); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: white; z-index: 1; }
+  .modal-title { font-size: 16px; font-weight: 800; color: var(--gray-800); letter-spacing: -0.3px; }
   .modal-body { padding: 24px; }
-  .modal-footer { padding: 16px 24px; border-top: 1px solid var(--gray-100); display: flex; gap: 10px; justify-content: flex-end; }
-  .close-btn { background: none; border: none; cursor: pointer; padding: 4px; border-radius: 4px; color: var(--gray-400); }
+  .modal-footer { padding: 16px 24px; border-top: 1px solid var(--gray-100); display: flex; gap: 10px; justify-content: flex-end; background: var(--gray-50); border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
+  .close-btn { background: none; border: none; cursor: pointer; padding: 6px; border-radius: 4px; color: var(--gray-400); font-size: 18px; line-height: 1; }
   .close-btn:hover { color: var(--gray-800); background: var(--gray-100); }
 
-  /* SEARCH BAR */
+  /* SEARCH */
   .search-bar { position: relative; }
   .search-bar input { padding-left: 36px; }
-  .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--gray-400); }
+  .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--gray-400); pointer-events: none; }
 
   /* FILTER ROW */
-  .filter-row { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
-  .filter-row select, .filter-row input { width: auto; min-width: 160px; }
+  .filter-row { display: flex; gap: 10px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+  .filter-row select, .filter-row input { width: auto; min-width: 150px; }
 
   /* TABS */
-  .tabs { display: flex; border-bottom: 1px solid var(--gray-200); margin-bottom: 20px; gap: 0; }
-  .tab { padding: 10px 18px; font-size: 13.5px; font-weight: 500; color: var(--gray-600); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .tabs { display: flex; border-bottom: 2px solid var(--gray-200); margin-bottom: 0; padding: 0 20px; }
+  .tab { padding: 12px 16px; font-size: 12.5px; font-weight: 700; color: var(--gray-400); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.5px; }
   .tab:hover { color: var(--gray-800); }
-  .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+  .tab.active { color: var(--fs-red); border-bottom-color: var(--fs-red); }
 
   /* CALENDAR */
-  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: var(--gray-200); border-radius: var(--radius); overflow: hidden; }
-  .cal-day-header { background: var(--gray-50); padding: 8px; text-align: center; font-size: 11px; font-weight: 600; color: var(--gray-600); text-transform: uppercase; }
-  .cal-day { background: white; min-height: 90px; padding: 6px; cursor: pointer; transition: background 0.1s; }
-  .cal-day:hover { background: var(--gray-50); }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: var(--gray-200); overflow: hidden; }
+  .cal-day-header { background: var(--navy); padding: 10px; text-align: center; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
+  .cal-day { background: white; min-height: 95px; padding: 8px; cursor: pointer; transition: background 0.1s; }
+  .cal-day:hover { background: #fff5f5; }
   .cal-day.other-month { background: var(--gray-50); }
-  .cal-day.today { background: var(--blue-light); }
-  .cal-day-num { font-size: 13px; font-weight: 500; margin-bottom: 4px; color: var(--gray-800); }
-  .cal-day.other-month .cal-day-num { color: var(--gray-400); }
-  .cal-event { font-size: 10.5px; padding: 2px 5px; border-radius: 3px; margin-bottom: 2px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .cal-day.today { background: #fff0f1; }
+  .cal-day.today .cal-day-num { background: var(--fs-red); color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+  .cal-day-num { font-size: 13px; font-weight: 700; margin-bottom: 5px; color: var(--gray-800); }
+  .cal-day.other-month .cal-day-num { color: var(--gray-300); }
+  .cal-event { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 3px; margin-bottom: 2px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-transform: uppercase; letter-spacing: 0.3px; }
   .cal-nav { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-  .cal-nav h2 { font-size: 16px; font-weight: 600; flex: 1; text-align: center; }
+  .cal-nav h2 { font-size: 18px; font-weight: 800; flex: 1; text-align: center; letter-spacing: -0.5px; }
 
-  /* EMPTY STATE */
-  .empty { text-align: center; padding: 48px 20px; color: var(--gray-400); }
-  .empty svg { width: 48px; height: 48px; margin: 0 auto 12px; display: block; opacity: 0.4; }
-  .empty p { font-size: 14px; }
-
-  /* NOTIFICATION */
-  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--gray-800); color: white; padding: 12px 18px; border-radius: var(--radius); font-size: 13.5px; z-index: 999; box-shadow: var(--shadow-md); animation: slideIn 0.2s ease; }
-  @keyframes slideIn { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-  /* DELIBERA DETAIL */
-  .delibera-row { padding: 14px 0; border-bottom: 1px solid var(--gray-100); }
-  .delibera-row:last-child { border-bottom: none; }
-  .delibera-num { font-size: 11px; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-  .delibera-titolo { font-size: 14px; font-weight: 600; color: var(--gray-800); margin-bottom: 6px; }
-  .delibera-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-  .voti-bar { display: flex; gap: 8px; align-items: center; font-size: 12px; }
-  .voto-item { display: flex; align-items: center; gap: 4px; }
-  .voto-dot { width: 8px; height: 8px; border-radius: 50%; }
-
-  /* PRESENZA CHECKLIST */
-  .presence-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  /* PRESENCE */
+  .presence-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
   .presence-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--gray-200); border-radius: var(--radius); cursor: pointer; transition: all 0.15s; }
-  .presence-item:hover { border-color: var(--blue-mid); }
+  .presence-item:hover { border-color: var(--fs-red); }
   .presence-item.presente { border-color: var(--green); background: var(--green-light); }
-  .presence-item.assente { border-color: var(--gray-200); background: var(--gray-50); opacity: 0.7; }
+  .presence-item.assente { opacity: 0.6; }
   .presence-check { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--gray-300); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .presence-item.presente .presence-check { border-color: var(--green); background: var(--green); }
-  .presence-name { font-size: 13px; font-weight: 500; }
+  .presence-name { font-size: 12.5px; font-weight: 600; }
 
+  /* DELIBERA ROWS */
+  .delibera-row { padding: 16px 20px; border-bottom: 1px solid var(--gray-100); }
+  .delibera-row:last-child { border-bottom: none; }
+  .delibera-num { font-size: 10px; font-weight: 800; color: var(--fs-red); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .delibera-titolo { font-size: 14px; font-weight: 700; color: var(--gray-800); margin-bottom: 6px; }
+  .delibera-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .voti-bar { display: flex; gap: 12px; align-items: center; font-size: 12px; font-weight: 600; }
+  .voto-item { display: flex; align-items: center; gap: 5px; }
+  .voto-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* UTILS */
+  .empty { text-align: center; padding: 56px 20px; color: var(--gray-400); }
+  .empty-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.3; }
+  .empty p { font-size: 14px; font-weight: 500; }
+  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--gray-800); color: white; padding: 12px 20px; border-radius: var(--radius); font-size: 13px; font-weight: 600; z-index: 999; box-shadow: var(--shadow-md); animation: slideIn 0.2s ease; border-left: 4px solid var(--fs-red); }
+  @keyframes slideIn { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .loading { text-align: center; padding: 48px; color: var(--gray-400); font-size: 14px; font-weight: 500; }
   .hidden { display: none !important; }
-  .divider { height: 1px; background: var(--gray-100); margin: 16px 0; }
+  .divider { height: 1px; background: var(--gray-100); margin: 20px 0; }
   .text-muted { color: var(--gray-400); font-size: 13px; }
   .mt-16 { margin-top: 16px; }
-  .flex-between { display: flex; justify-content: space-between; align-items: center; }
-  .gap-8 { gap: 8px; }
-  .loading { text-align: center; padding: 40px; color: var(--gray-400); font-size: 14px; }
+  .section-title { font-size: 11px; font-weight: 800; color: var(--gray-500); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .action-row { display: flex; gap: 6px; }
 </style>
 </head>
 <body>
-
 <div class="layout">
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sidebar-logo">
-      <h1>Cassa del Notariato</h1>
-      <p>Gestionale Delibere</p>
+      <div class="logo-bar">
+        <div class="logo-placeholder"><span>FS</span></div>
+        <div class="logo-brand">FSBOARD</div>
+        <div class="logo-sub">Gestionale Delibere</div>
+      </div>
     </div>
     <nav class="sidebar-nav">
       <div class="nav-section">Principale</div>
-      <div class="nav-item active" onclick="showPage('dashboard')">
+      <div class="nav-item" data-page="dashboard" onclick="showPage('dashboard')">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         Dashboard
       </div>
-      <div class="nav-item" onclick="showPage('calendario')">
+      <div class="nav-item" data-page="calendario" onclick="showPage('calendario')">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Calendario
       </div>
       <div class="nav-section">Gestione</div>
-      <div class="nav-item" onclick="showPage('sedute')">
+      <div class="nav-item" data-page="sedute" onclick="showPage('sedute')">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         Sedute
       </div>
-      <div class="nav-item" onclick="showPage('delibere')">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      <div class="nav-item" data-page="delibere" onclick="showPage('delibere')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
         Delibere
       </div>
-      <div class="nav-item" onclick="showPage('ricerca')">
+      <div class="nav-item" data-page="ricerca" onclick="showPage('ricerca')">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         Ricerca
       </div>
       <div class="nav-section">Configurazione</div>
-      <div class="nav-item" onclick="showPage('membri')">
+      <div class="nav-item" data-page="membri" onclick="showPage('membri')">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         Anagrafiche
       </div>
-      <div class="nav-item" onclick="showPage('report')">
+      <div class="nav-item" data-page="report" onclick="showPage('report')">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        Report
+        Report & Export
       </div>
     </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-footer-text">FSBOARD v2.0 — Ferrovie dello Stato</div>
+    </div>
   </aside>
 
-  <!-- MAIN -->
   <main class="main">
     <div class="topbar">
-      <div class="topbar-title" id="page-title">Dashboard</div>
+      <div class="topbar-left">
+        <div>
+          <div class="topbar-eyebrow">FSBOARD</div>
+          <div class="topbar-title" id="page-title">Dashboard</div>
+        </div>
+      </div>
       <div class="topbar-actions" id="topbar-actions"></div>
     </div>
     <div class="content" id="page-content">
@@ -237,94 +258,56 @@
   </main>
 </div>
 
-<!-- MODAL CONTAINER -->
 <div id="modal-container"></div>
 
 <script>
 const SUPABASE_URL = 'https://dkgzhmorstykmpucodoa.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrZ3pobW9yc3R5a21wdWNvZG9hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyMzg4NTUsImV4cCI6MjA5NzgxNDg1NX0.OD0Rs2aFJVbkCy516CXVV64uHsGveNHfAb3_EtgW7Qw';
-
 const ORGANI = ['Assemblea','CDA','Collegio Sindacale','Comitato Rischi','Comitato Remunerazione'];
-const ORGANO_CLASS = {
-  'Assemblea': 'organo-assemblea',
-  'CDA': 'organo-cda',
-  'Collegio Sindacale': 'organo-collegio',
-  'Comitato Rischi': 'organo-comitato',
-  'Comitato Remunerazione': 'organo-comitato'
-};
+const ORGANO_CLASS = {'Assemblea':'organo-assemblea','CDA':'organo-cda','Collegio Sindacale':'organo-collegio','Comitato Rischi':'organo-comitato','Comitato Remunerazione':'organo-comitato'};
+let _currentPage = '';
 
 async function sb(table, method='GET', body=null, params='') {
-  const opts = {
-    method,
-    headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': 'Bearer ' + SUPABASE_KEY,
-      'Content-Type': 'application/json',
-      'Prefer': method === 'POST' ? 'return=representation' : ''
-    }
-  };
+  const opts = { method, headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer '+SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': method==='POST'?'return=representation':method==='PATCH'?'return=representation':'' } };
   if (body) opts.body = JSON.stringify(body);
   const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}${params}`, opts);
   if (!res.ok) { const e = await res.text(); throw new Error(e); }
-  if (method === 'DELETE' || res.status === 204) return null;
+  if (method==='DELETE'||res.status===204) return null;
   return res.json();
 }
 
 function toast(msg, type='success') {
+  document.querySelectorAll('.toast').forEach(t=>t.remove());
   const t = document.createElement('div');
   t.className = 'toast';
-  t.style.background = type === 'error' ? '#dc2626' : '#1e293b';
+  t.style.borderLeftColor = type==='error'?'#E2001A':'#2d9b57';
   t.textContent = msg;
   document.body.appendChild(t);
-  setTimeout(() => t.remove(), 3000);
+  setTimeout(()=>t.remove(), 3000);
 }
 
-function openModal(html) {
-  document.getElementById('modal-container').innerHTML = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()">${html}</div>`;
-}
-function closeModal() { document.getElementById('modal-container').innerHTML = ''; }
+function openModal(html) { document.getElementById('modal-container').innerHTML=`<div class="modal-overlay" onclick="if(event.target===this)closeModal()">${html}</div>`; }
+function closeModal() { document.getElementById('modal-container').innerHTML=''; }
 
-function orgBadge(organo) {
-  return `<span class="badge ${ORGANO_CLASS[organo]||'badge-gray'}">${organo}</span>`;
-}
-function esitoBadge(esito) {
-  const map = {approvata:'badge-green',respinta:'badge-red',rinviata:'badge-amber',ritirata:'badge-gray'};
-  return `<span class="badge ${map[esito]||'badge-gray'}">${esito}</span>`;
-}
-function formatDate(d) {
-  if (!d) return '—';
-  return new Date(d).toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'});
+function orgBadge(o) { return `<span class="badge ${ORGANO_CLASS[o]||'badge-gray'}">${o}</span>`; }
+function esitoBadge(e) { const m={approvata:'badge-green',respinta:'badge-red',rinviata:'badge-amber',ritirata:'badge-gray'}; return `<span class="badge ${m[e]||'badge-gray'}">${e}</span>`; }
+function formatDate(d) { if(!d) return '—'; return new Date(d+'T12:00:00').toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'}); }
+function formatDateShort(d) { if(!d) return '—'; return new Date(d+'T12:00:00').toLocaleDateString('it-IT',{day:'2-digit',month:'short',year:'numeric'}); }
+
+function setActivePage(page) {
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.toggle('active', n.dataset.page === page);
+  });
 }
 
 function showPage(page) {
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const items = document.querySelectorAll('.nav-item');
-  const idx = ['dashboard','calendario','','sedute','delibere','ricerca','','membri','report'];
-  const i = idx.indexOf(page);
-  if (i >= 0 && items[i]) items[i].classList.add('active');
-  
+  _currentPage = page;
+  setActivePage(page);
   document.getElementById('topbar-actions').innerHTML = '';
-  
-  const pages = {
-    dashboard: renderDashboard,
-    calendario: renderCalendario,
-    sedute: renderSedute,
-    delibere: renderDelibere,
-    ricerca: renderRicerca,
-    membri: renderMembri,
-    report: renderReport
-  };
-  const titles = {
-    dashboard: 'Dashboard',
-    calendario: 'Calendario sedute',
-    sedute: 'Sedute',
-    delibere: 'Delibere',
-    ricerca: 'Ricerca',
-    membri: 'Anagrafiche membri',
-    report: 'Report & Export'
-  };
-  document.getElementById('page-title').textContent = titles[page] || page;
-  document.getElementById('page-content').innerHTML = '<div class="loading">Caricamento...</div>';
+  const titles = {dashboard:'Dashboard',calendario:'Calendario sedute',sedute:'Sedute',delibere:'Delibere',ricerca:'Ricerca',membri:'Anagrafiche membri',report:'Report & Export'};
+  document.getElementById('page-title').textContent = titles[page]||page;
+  document.getElementById('page-content').innerHTML = '<div class="loading">Caricamento in corso...</div>';
+  const pages = {dashboard:renderDashboard,calendario:renderCalendario,sedute:renderSedute,delibere:renderDelibere,ricerca:renderRicerca,membri:renderMembri,report:renderReport};
   if (pages[page]) pages[page]();
 }
 
@@ -337,133 +320,88 @@ async function renderDashboard() {
       sb('membri','GET',null,'?select=*&attivo=eq.true')
     ]);
     const oggi = new Date().toISOString().split('T')[0];
-    const prossime = sedute.filter(s => s.data >= oggi).sort((a,b)=>a.data.localeCompare(b.data));
-    const recenti = sedute.filter(s => s.data < oggi).slice(0,5);
-    const approvate = delibere.filter(d => d.esito === 'approvata').length;
-    const percentuale = delibere.length ? Math.round(approvate/delibere.length*100) : 0;
+    const prossime = sedute.filter(s=>s.data>=oggi).sort((a,b)=>a.data.localeCompare(b.data));
+    const recenti = sedute.filter(s=>s.data<oggi).slice(0,6);
+    const approvate = delibere.filter(d=>d.esito==='approvata').length;
+    const perc = delibere.length ? Math.round(approvate/delibere.length*100) : 0;
 
     document.getElementById('page-content').innerHTML = `
       <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-label"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Sedute totali</div>
-          <div class="stat-value">${sedute.length}</div>
-          <div class="stat-sub">${prossime.length} prossime</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16h16V8z"/><polyline points="14 2 14 8 20 8"/></svg> Delibere</div>
-          <div class="stat-value">${delibere.length}</div>
-          <div class="stat-sub">${approvate} approvate (${percentuale}%)</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Membri attivi</div>
-          <div class="stat-value">${membri.length}</div>
-          <div class="stat-sub">su ${ORGANI.length} organi</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Prossima seduta</div>
-          <div class="stat-value" style="font-size:18px">${prossime.length ? formatDate(prossime[0].data) : '—'}</div>
-          <div class="stat-sub">${prossime.length ? prossime[0].organo : 'Nessuna programmata'}</div>
-        </div>
+        <div class="stat-card"><div class="stat-label">Sedute totali</div><div class="stat-value">${sedute.length}</div><div class="stat-sub">${prossime.length} programmate</div></div>
+        <div class="stat-card"><div class="stat-label">Delibere</div><div class="stat-value">${delibere.length}</div><div class="stat-sub">${approvate} approvate · ${perc}%</div></div>
+        <div class="stat-card"><div class="stat-label">Membri attivi</div><div class="stat-value">${membri.length}</div><div class="stat-sub">su ${ORGANI.length} organi</div></div>
+        <div class="stat-card"><div class="stat-label">Prossima seduta</div><div class="stat-value" style="font-size:20px;margin-top:4px">${prossime.length?formatDateShort(prossime[0].data):'—'}</div><div class="stat-sub">${prossime.length?prossime[0].organo:'Nessuna programmata'}</div></div>
       </div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div style="display:grid;grid-template-columns:3fr 2fr;gap:20px">
         <div class="card">
-          <div class="card-header"><span class="card-title">Prossime sedute</span></div>
-          <div class="card-body" style="padding:0">
-            ${prossime.length === 0 ? '<div class="empty"><p>Nessuna seduta programmata</p></div>' :
-              prossime.slice(0,6).map(s => `
-                <div style="padding:14px 20px;border-bottom:1px solid var(--gray-100);display:flex;justify-content:space-between;align-items:center">
-                  <div>
-                    <div style="font-size:13.5px;font-weight:600">${formatDate(s.data)}${s.ora ? ' · '+s.ora.slice(0,5) : ''}</div>
-                    <div style="font-size:12px;color:var(--gray-400);margin-top:2px">${s.luogo||'Sede legale'}</div>
-                  </div>
-                  ${orgBadge(s.organo)}
-                </div>
-              `).join('')}
+          <div class="card-header"><span class="card-title">Prossime sedute</span><button class="btn btn-primary btn-sm" onclick="showNuovaSeduta()">+ Nuova seduta</button></div>
+          <div>
+            ${prossime.length===0?'<div class="empty"><div class="empty-icon">📅</div><p>Nessuna seduta programmata</p></div>':
+              prossime.slice(0,6).map(s=>`<div style="padding:14px 20px;border-bottom:1px solid var(--gray-100);display:flex;justify-content:space-between;align-items:center">
+                <div><div style="font-size:13.5px;font-weight:700">${formatDate(s.data)}${s.ora?' · '+s.ora.slice(0,5):''}</div><div style="font-size:12px;color:var(--gray-400);margin-top:2px">${s.luogo||'Sede legale'}</div></div>
+                ${orgBadge(s.organo)}</div>`).join('')}
           </div>
         </div>
         <div class="card">
           <div class="card-header"><span class="card-title">Sedute recenti</span></div>
-          <div class="card-body" style="padding:0">
-            ${recenti.length === 0 ? '<div class="empty"><p>Nessuna seduta registrata</p></div>' :
-              recenti.map(s => `
-                <div style="padding:14px 20px;border-bottom:1px solid var(--gray-100);display:flex;justify-content:space-between;align-items:center">
-                  <div>
-                    <div style="font-size:13.5px;font-weight:600">${formatDate(s.data)}</div>
-                    <div style="font-size:12px;color:var(--gray-400);margin-top:2px">${s.tipo}</div>
-                  </div>
-                  ${orgBadge(s.organo)}
-                </div>
-              `).join('')}
+          <div>
+            ${recenti.length===0?'<div class="empty"><div class="empty-icon">📋</div><p>Nessuna seduta</p></div>':
+              recenti.map(s=>`<div style="padding:12px 20px;border-bottom:1px solid var(--gray-100);display:flex;justify-content:space-between;align-items:center;cursor:pointer" onclick="showDettaglioSeduta('${s.id}')">
+                <div><div style="font-size:13px;font-weight:600">${formatDateShort(s.data)}</div><div style="font-size:11px;color:var(--gray-400);margin-top:1px">${s.tipo}</div></div>
+                ${orgBadge(s.organo)}</div>`).join('')}
           </div>
         </div>
       </div>`;
   } catch(e) {
-    document.getElementById('page-content').innerHTML = `<div class="empty"><p>Errore connessione: ${e.message}</p></div>`;
+    document.getElementById('page-content').innerHTML=`<div class="empty"><p>Errore connessione: ${e.message}</p></div>`;
   }
 }
 
 // ===== CALENDARIO =====
 async function renderCalendario() {
-  let now = new Date();
-  let year = now.getFullYear();
-  let month = now.getMonth();
-  
+  let now=new Date(), year=now.getFullYear(), month=now.getMonth();
   async function drawCal() {
-    const from = new Date(year, month, 1).toISOString().split('T')[0];
-    const to = new Date(year, month+1, 0).toISOString().split('T')[0];
-    const sedute = await sb('sedute','GET',null,`?data=gte.${from}&data=lte.${to}&select=*`);
-    
-    const days = ['Lun','Mar','Mer','Gio','Ven','Sab','Dom'];
-    const months = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
-    
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month+1, 0);
-    let startDow = (firstDay.getDay() + 6) % 7;
-    
-    let cells = [];
-    for(let i=0; i<startDow; i++) {
-      const d = new Date(year, month, -startDow+i+1);
-      cells.push({date: d, current: false});
-    }
-    for(let i=1; i<=lastDay.getDate(); i++) {
-      cells.push({date: new Date(year, month, i), current: true});
-    }
-    while(cells.length % 7 !== 0) {
-      const d = new Date(year, month+1, cells.length - lastDay.getDate() - startDow + 1);
-      cells.push({date: d, current: false});
-    }
-    
-    const todayStr = new Date().toISOString().split('T')[0];
-    
-    document.getElementById('page-content').innerHTML = `
+    const from=new Date(year,month,1).toISOString().split('T')[0];
+    const to=new Date(year,month+1,0).toISOString().split('T')[0];
+    const sedute=await sb('sedute','GET',null,`?data=gte.${from}&data=lte.${to}&select=*`);
+    const months=['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+    const days=['LUN','MAR','MER','GIO','VEN','SAB','DOM'];
+    const firstDay=new Date(year,month,1);
+    const lastDay=new Date(year,month+1,0);
+    let startDow=(firstDay.getDay()+6)%7;
+    let cells=[];
+    for(let i=0;i<startDow;i++){const d=new Date(year,month,-startDow+i+1);cells.push({date:d,current:false});}
+    for(let i=1;i<=lastDay.getDate();i++){cells.push({date:new Date(year,month,i),current:true});}
+    while(cells.length%7!==0){const d=new Date(year,month+1,cells.length-lastDay.getDate()-startDow+1);cells.push({date:d,current:false});}
+    const todayStr=new Date().toISOString().split('T')[0];
+    document.getElementById('page-content').innerHTML=`
       <div class="cal-nav">
-        <button class="btn btn-secondary btn-sm" onclick="calPrev()">← Prec</button>
+        <button class="btn btn-ghost btn-sm" onclick="calPrev()">← Precedente</button>
         <h2>${months[month]} ${year}</h2>
-        <button class="btn btn-secondary btn-sm" onclick="calNext()">Succ →</button>
+        <button class="btn btn-ghost btn-sm" onclick="calNext()">Successivo →</button>
         <button class="btn btn-primary btn-sm" onclick="showNuovaSeduta()">+ Nuova seduta</button>
       </div>
-      <div class="card">
+      <div class="card" style="overflow:hidden">
         <div class="cal-grid">
           ${days.map(d=>`<div class="cal-day-header">${d}</div>`).join('')}
-          ${cells.map(c => {
-            const ds = c.date.toISOString().split('T')[0];
-            const evts = sedute.filter(s => s.data === ds);
+          ${cells.map(c=>{
+            const ds=c.date.toISOString().split('T')[0];
+            const evts=sedute.filter(s=>s.data===ds);
             return `<div class="cal-day ${!c.current?'other-month':''} ${ds===todayStr?'today':''}" onclick="calDayClick('${ds}')">
               <div class="cal-day-num">${c.date.getDate()}</div>
-              ${evts.map(e=>`<div class="cal-event badge ${ORGANO_CLASS[e.organo]||'badge-gray'}">${e.organo}</div>`).join('')}
+              ${evts.map(e=>`<div class="cal-event badge ${ORGANO_CLASS[e.organo]||'badge-gray'}">${e.organo.substring(0,3)}</div>`).join('')}
             </div>`;
           }).join('')}
         </div>
       </div>`;
-    
-    window.calPrev = () => { if(month===0){month=11;year--;}else{month--;} drawCal(); };
-    window.calNext = () => { if(month===11){month=0;year++;}else{month++;} drawCal(); };
-    window.calDayClick = async (ds) => {
-      const evts = sedute.filter(s => s.data === ds);
-      if (evts.length === 0) return;
+    window.calPrev=()=>{if(month===0){month=11;year--;}else{month--;}drawCal();};
+    window.calNext=()=>{if(month===11){month=0;year++;}else{month++;}drawCal();};
+    window.calDayClick=async(ds)=>{
+      const evts=sedute.filter(s=>s.data===ds);
+      if(!evts.length) return;
       openModal(`<div class="modal"><div class="modal-header"><span class="modal-title">Sedute del ${formatDate(ds)}</span><button class="close-btn" onclick="closeModal()">✕</button></div>
-        <div class="modal-body">${evts.map(s=>`<div class="delibera-row"><div class="delibera-meta">${orgBadge(s.organo)}<span class="badge badge-gray">${s.tipo}</span></div><div style="margin-top:8px;font-size:13.5px">${s.luogo||'Sede legale'}</div><div style="margin-top:8px;display:flex;gap:8px"><button class="btn btn-secondary btn-sm" onclick="closeModal();showPage('sedute')">Vedi OdG →</button></div></div>`).join('')}</div>
+        <div class="modal-body">${evts.map(s=>`<div class="delibera-row"><div class="delibera-meta">${orgBadge(s.organo)}<span class="badge badge-gray">${s.tipo}</span></div>
+        <div style="margin-top:10px"><button class="btn btn-primary btn-sm" onclick="closeModal();showDettaglioSeduta('${s.id}')">Apri dettaglio →</button></div></div>`).join('')}</div>
         <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal()">Chiudi</button></div></div>`);
     };
   }
@@ -472,762 +410,553 @@ async function renderCalendario() {
 
 // ===== SEDUTE =====
 async function renderSedute() {
-  document.getElementById('topbar-actions').innerHTML = `<button class="btn btn-primary btn-sm" onclick="showNuovaSeduta()">+ Nuova seduta</button>`;
-  
+  document.getElementById('topbar-actions').innerHTML=`<button class="btn btn-primary btn-sm" onclick="showNuovaSeduta()">+ Nuova seduta</button>`;
   try {
-    const sedute = await sb('sedute','GET',null,'?select=*&order=data.desc');
-    
-    document.getElementById('page-content').innerHTML = `
+    const sedute=await sb('sedute','GET',null,'?select=*&order=data.desc');
+    const anni=[...new Set(sedute.map(s=>s.data.split('-')[0]))].sort().reverse();
+    document.getElementById('page-content').innerHTML=`
       <div class="filter-row">
-        <div class="search-bar">
-          <svg class="search-icon" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" placeholder="Cerca per luogo, note..." id="filter-text" oninput="filterSedute()">
-        </div>
-        <select id="filter-organo" onchange="filterSedute()">
-          <option value="">Tutti gli organi</option>
-          ${ORGANI.map(o=>`<option>${o}</option>`).join('')}
-        </select>
-        <select id="filter-anno" onchange="filterSedute()">
-          <option value="">Tutti gli anni</option>
-          ${[...new Set(sedute.map(s=>s.data.split('-')[0]))].sort().reverse().map(y=>`<option>${y}</option>`).join('')}
-        </select>
-        <select id="filter-tipo" onchange="filterSedute()">
-          <option value="">Tutti i tipi</option>
-          <option>ordinaria</option><option>straordinaria</option>
-        </select>
+        <div class="search-bar"><svg class="search-icon" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Cerca seduta..." id="filter-text" oninput="filterSedute()"></div>
+        <select id="filter-organo" onchange="filterSedute()"><option value="">Tutti gli organi</option>${ORGANI.map(o=>`<option>${o}</option>`).join('')}</select>
+        <select id="filter-anno" onchange="filterSedute()"><option value="">Tutti gli anni</option>${anni.map(y=>`<option>${y}</option>`).join('')}</select>
+        <select id="filter-tipo" onchange="filterSedute()"><option value="">Tutti i tipi</option><option>ordinaria</option><option>straordinaria</option></select>
       </div>
-      <div class="card">
-        <div class="table-wrap">
-          <table id="sedute-table">
-            <thead><tr><th>Data</th><th>Organo</th><th>Tipo</th><th>Luogo</th><th>Presenti</th><th>OdG</th><th>Azioni</th></tr></thead>
-            <tbody id="sedute-tbody"></tbody>
-          </table>
-        </div>
-      </div>`;
-    
-    window._sedute = sedute;
-    window.filterSedute = async () => {
-      const txt = document.getElementById('filter-text')?.value.toLowerCase()||'';
-      const org = document.getElementById('filter-organo')?.value||'';
-      const anno = document.getElementById('filter-anno')?.value||'';
-      const tipo = document.getElementById('filter-tipo')?.value||'';
-      const filtered = window._sedute.filter(s =>
-        (!txt || (s.luogo||'').toLowerCase().includes(txt) || (s.note||'').toLowerCase().includes(txt)) &&
-        (!org || s.organo === org) &&
-        (!anno || s.data.startsWith(anno)) &&
-        (!tipo || s.tipo === tipo)
-      );
-      renderSeduteTbody(filtered);
+      <div class="card"><div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Organo</th><th>Tipo</th><th>Luogo</th><th>Presenti</th><th>Punti OdG</th><th>Azioni</th></tr></thead>
+        <tbody id="sedute-tbody"></tbody>
+      </table></div></div>`;
+    window._sedute=sedute;
+    window.filterSedute=async()=>{
+      const txt=document.getElementById('filter-text')?.value.toLowerCase()||'';
+      const org=document.getElementById('filter-organo')?.value||'';
+      const anno=document.getElementById('filter-anno')?.value||'';
+      const tipo=document.getElementById('filter-tipo')?.value||'';
+      const filtered=window._sedute.filter(s=>
+        (!txt||(s.luogo||'').toLowerCase().includes(txt)||(s.note||'').toLowerCase().includes(txt))&&
+        (!org||s.organo===org)&&(!anno||s.data.startsWith(anno))&&(!tipo||s.tipo===tipo));
+      await renderSeduteTbody(filtered);
     };
-    
     async function renderSeduteTbody(list) {
-      const tbody = document.getElementById('sedute-tbody');
-      if (!tbody) return;
-      if (list.length === 0) { tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--gray-400)">Nessuna seduta trovata</td></tr>`; return; }
-      
-      const ids = list.map(s=>`"${s.id}"`).join(',');
-      const [presenze, odg] = await Promise.all([
+      const tbody=document.getElementById('sedute-tbody');
+      if(!tbody) return;
+      if(list.length===0){tbody.innerHTML=`<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--gray-400);font-weight:500">Nessuna seduta trovata</td></tr>`;return;}
+      const ids=list.map(s=>`"${s.id}"`).join(',');
+      const [presenze,odg]=await Promise.all([
         sb('presenze','GET',null,`?seduta_id=in.(${ids})&select=*`),
         sb('punti_odg','GET',null,`?seduta_id=in.(${ids})&select=*`)
       ]);
-      
-      tbody.innerHTML = list.map(s => {
-        const pres = presenze.filter(p=>p.seduta_id===s.id&&p.presente).length;
-        const nodg = odg.filter(p=>p.seduta_id===s.id).length;
+      tbody.innerHTML=list.map(s=>{
+        const pres=presenze.filter(p=>p.seduta_id===s.id&&p.presente).length;
+        const nodg=odg.filter(p=>p.seduta_id===s.id).length;
         return `<tr>
-          <td><strong>${formatDate(s.data)}</strong>${s.ora?`<div style="font-size:11px;color:var(--gray-400)">${s.ora.slice(0,5)}</div>`:''}</td>
+          <td><strong>${formatDateShort(s.data)}</strong>${s.ora?`<div style="font-size:11px;color:var(--gray-400);margin-top:2px">${s.ora.slice(0,5)}</div>`:''}</td>
           <td>${orgBadge(s.organo)}</td>
           <td><span class="badge badge-gray">${s.tipo}</span></td>
-          <td>${s.luogo||'<span class="text-muted">—</span>'}</td>
-          <td>${pres > 0 ? `<span class="badge badge-blue">${pres} presenti</span>` : '<span class="text-muted">—</span>'}</td>
-          <td>${nodg > 0 ? `<span class="badge badge-gray">${nodg} punti</span>` : '<span class="text-muted">—</span>'}</td>
-          <td style="white-space:nowrap">
-            <button class="btn btn-secondary btn-sm" onclick="showDettaglioSeduta('${s.id}')">Dettaglio</button>
-            <button class="btn btn-danger btn-sm" onclick="deleteSeduta('${s.id}')">Elimina</button>
-          </td>
-        </tr>`;
+          <td style="font-size:13px">${s.luogo||'<span class="text-muted">—</span>'}</td>
+          <td>${pres>0?`<span class="badge badge-blue">${pres}</span>`:'<span class="text-muted">—</span>'}</td>
+          <td>${nodg>0?`<span class="badge badge-gray">${nodg}</span>`:'<span class="text-muted">—</span>'}</td>
+          <td><div class="action-row">
+            <button class="btn btn-secondary btn-sm" onclick="showDettaglioSeduta('${s.id}')">Apri</button>
+            <button class="btn btn-ghost btn-sm" onclick="showModificaSeduta('${s.id}')">Modifica</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteSeduta('${s.id}')">✕</button>
+          </div></td></tr>`;
       }).join('');
     }
-    
-    window.deleteSeduta = async (id) => {
-      if (!confirm('Eliminare la seduta e tutti i dati collegati?')) return;
-      await sb('sedute','DELETE',null,`?id=eq.${id}`);
-      toast('Seduta eliminata');
-      renderSedute();
-    };
-    
+    window.deleteSeduta=async(id)=>{if(!confirm('Eliminare la seduta e tutti i dati collegati?'))return;await sb('sedute','DELETE',null,`?id=eq.${id}`);toast('Seduta eliminata');renderSedute();};
     filterSedute();
-  } catch(e) {
-    document.getElementById('page-content').innerHTML = `<div class="empty"><p>Errore: ${e.message}</p></div>`;
-  }
+  } catch(e){document.getElementById('page-content').innerHTML=`<div class="empty"><p>Errore: ${e.message}</p></div>`;}
 }
 
 // ===== NUOVA SEDUTA =====
-window.showNuovaSeduta = async () => {
-  const membri = await sb('membri','GET',null,'?select=*&attivo=eq.true&order=cognome.asc');
-  const memOpts = (org) => membri.filter(m=>m.organo===org).map(m=>`<option value="${m.id}">${m.cognome} ${m.nome}</option>`).join('');
-  
+window.showNuovaSeduta=async()=>{
+  const membri=await sb('membri','GET',null,'?select=*&attivo=eq.true&order=cognome.asc');
   openModal(`<div class="modal">
     <div class="modal-header"><span class="modal-title">Nuova seduta</span><button class="close-btn" onclick="closeModal()">✕</button></div>
     <div class="modal-body">
       <div class="form-grid">
-        <div class="form-group">
-          <label>Organo *</label>
-          <select id="ns-organo" onchange="updateNsPresenze()">
-            ${ORGANI.map(o=>`<option>${o}</option>`).join('')}
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Tipo</label>
-          <select id="ns-tipo"><option>ordinaria</option><option>straordinaria</option></select>
-        </div>
-        <div class="form-group">
-          <label>Data *</label>
-          <input type="date" id="ns-data">
-        </div>
-        <div class="form-group">
-          <label>Ora</label>
-          <input type="time" id="ns-ora">
-        </div>
-        <div class="form-group full">
-          <label>Luogo</label>
-          <input type="text" id="ns-luogo" placeholder="Es: Sede legale, Sala riunioni A...">
-        </div>
-        <div class="form-group">
-          <label>Presidente</label>
-          <select id="ns-presidente"><option value="">— seleziona —</option></select>
-        </div>
-        <div class="form-group">
-          <label>Segretario</label>
-          <select id="ns-segretario"><option value="">— seleziona —</option></select>
-        </div>
-        <div class="form-group full">
-          <label>Note</label>
-          <textarea id="ns-note" placeholder="Note generali sulla seduta..."></textarea>
-        </div>
+        <div class="form-group"><label>Organo *</label><select id="ns-organo" onchange="updateNsPresenze()">${ORGANI.map(o=>`<option>${o}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Tipo</label><select id="ns-tipo"><option>ordinaria</option><option>straordinaria</option></select></div>
+        <div class="form-group"><label>Data *</label><input type="date" id="ns-data"></div>
+        <div class="form-group"><label>Ora</label><input type="time" id="ns-ora"></div>
+        <div class="form-group full"><label>Luogo</label><input type="text" id="ns-luogo" placeholder="Es: Sede legale, Sala A..."></div>
+        <div class="form-group"><label>Presidente</label><select id="ns-presidente"><option value="">— seleziona —</option></select></div>
+        <div class="form-group"><label>Segretario</label><select id="ns-segretario"><option value="">— seleziona —</option></select></div>
+        <div class="form-group full"><label>Note</label><textarea id="ns-note" placeholder="Note generali..."></textarea></div>
       </div>
       <div class="divider"></div>
-      <div style="font-size:13px;font-weight:600;margin-bottom:12px">Presenze</div>
+      <div class="section-title">Presenze</div>
       <div class="presence-grid" id="ns-presenze-grid"><div class="text-muted">Seleziona l'organo per caricare i membri</div></div>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="closeModal()">Annulla</button>
-      <button class="btn btn-primary" onclick="salvaSeduta()">Salva seduta</button>
-    </div>
+    <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal()">Annulla</button><button class="btn btn-primary" onclick="salvaSeduta()">Salva seduta</button></div>
   </div>`);
-  
-  window._ns_membri = membri;
-  window.updateNsPresenze = () => {
-    const org = document.getElementById('ns-organo').value;
-    const filtered = membri.filter(m=>m.organo===org);
-    const presEl = document.getElementById('ns-presenze-grid');
-    const presEl2 = document.getElementById('ns-presidente');
-    const presEl3 = document.getElementById('ns-segretario');
-    if (presEl2) {
-      presEl2.innerHTML = `<option value="">— seleziona —</option>${filtered.map(m=>`<option value="${m.id}">${m.cognome} ${m.nome}</option>`).join('')}`;
-      presEl3.innerHTML = `<option value="">— seleziona —</option>${filtered.map(m=>`<option value="${m.id}">${m.cognome} ${m.nome}</option>`).join('')}`;
-    }
-    if (presEl) {
-      if (filtered.length === 0) { presEl.innerHTML = '<div class="text-muted">Nessun membro registrato per questo organo</div>'; return; }
-      presEl.innerHTML = filtered.map(m=>`
-        <div class="presence-item presente" id="pres-${m.id}" onclick="togglePresenza('${m.id}')">
-          <div class="presence-check">
-            <svg width="10" height="10" fill="white" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <span class="presence-name">${m.cognome} ${m.nome}</span>
-        </div>`).join('');
-    }
+  window._ns_membri=membri;
+  window.updateNsPresenze=()=>{
+    const org=document.getElementById('ns-organo').value;
+    const filtered=membri.filter(m=>m.organo===org);
+    const ps=document.getElementById('ns-presidente');
+    const ss=document.getElementById('ns-segretario');
+    if(ps){ps.innerHTML=`<option value="">— seleziona —</option>${filtered.map(m=>`<option value="${m.id}">${m.cognome} ${m.nome}</option>`).join('')}`;ss.innerHTML=ps.innerHTML;}
+    const pg=document.getElementById('ns-presenze-grid');
+    if(pg){if(!filtered.length){pg.innerHTML='<div class="text-muted">Nessun membro per questo organo</div>';return;}
+      pg.innerHTML=filtered.map(m=>`<div class="presence-item presente" id="pres-${m.id}" onclick="togglePresenza('${m.id}')"><div class="presence-check"><svg width="10" height="10" fill="white" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span class="presence-name">${m.cognome} ${m.nome}</span></div>`).join('');}
   };
-  
-  window.togglePresenza = (id) => {
-    const el = document.getElementById(`pres-${id}`);
-    el.classList.toggle('presente');
-    el.classList.toggle('assente');
+  window.togglePresenza=(id)=>{const el=document.getElementById(`pres-${id}`);el.classList.toggle('presente');el.classList.toggle('assente');};
+  window.salvaSeduta=async()=>{
+    const organo=document.getElementById('ns-organo').value;
+    const data=document.getElementById('ns-data').value;
+    if(!data){toast('Inserisci la data','error');return;}
+    const seduta=await sb('sedute','POST',{organo,data,ora:document.getElementById('ns-ora').value||null,luogo:document.getElementById('ns-luogo').value||null,tipo:document.getElementById('ns-tipo').value,presidente:document.getElementById('ns-presidente').value||null,segretario:document.getElementById('ns-segretario').value||null,note:document.getElementById('ns-note').value||null});
+    const sid=seduta[0].id;
+    const filteredM=window._ns_membri.filter(m=>m.organo===organo);
+    const presenzeData=filteredM.map(m=>({seduta_id:sid,membro_id:m.id,presente:document.getElementById(`pres-${m.id}`)?.classList.contains('presente')||false}));
+    if(presenzeData.length>0) await sb('presenze','POST',presenzeData);
+    closeModal();toast('Seduta creata');showDettaglioSeduta(sid);
   };
-  
-  window.salvaSeduta = async () => {
-    const organo = document.getElementById('ns-organo').value;
-    const data = document.getElementById('ns-data').value;
-    if (!data) { toast('Inserisci la data','error'); return; }
-    
-    const seduta = await sb('sedute','POST',{
-      organo, data,
-      ora: document.getElementById('ns-ora').value || null,
-      luogo: document.getElementById('ns-luogo').value || null,
-      tipo: document.getElementById('ns-tipo').value,
-      presidente: document.getElementById('ns-presidente').value || null,
-      segretario: document.getElementById('ns-segretario').value || null,
-      note: document.getElementById('ns-note').value || null
-    });
-    
-    const sedutaId = seduta[0].id;
-    const filteredM = window._ns_membri.filter(m=>m.organo===organo);
-    const presenzeData = filteredM.map(m => ({
-      seduta_id: sedutaId,
-      membro_id: m.id,
-      presente: document.getElementById(`pres-${m.id}`)?.classList.contains('presente') || false
-    }));
-    if (presenzeData.length > 0) await sb('presenze','POST', presenzeData);
-    
-    closeModal();
-    toast('Seduta creata con successo');
-    showDettaglioSeduta(sedutaId);
-  };
-  
   updateNsPresenze();
 };
 
+// ===== MODIFICA SEDUTA =====
+window.showModificaSeduta=async(id)=>{
+  const [sedutaArr,membri]=await Promise.all([sb('sedute','GET',null,`?id=eq.${id}&select=*`),sb('membri','GET',null,'?select=*&attivo=eq.true&order=cognome.asc')]);
+  const s=sedutaArr[0];
+  const filtered=membri.filter(m=>m.organo===s.organo);
+  const memOpts=filtered.map(m=>`<option value="${m.id}" ${m.id===s.presidente?'selected':''}>${m.cognome} ${m.nome}</option>`).join('');
+  const memOptsS=filtered.map(m=>`<option value="${m.id}" ${m.id===s.segretario?'selected':''}>${m.cognome} ${m.nome}</option>`).join('');
+  openModal(`<div class="modal">
+    <div class="modal-header"><span class="modal-title">Modifica seduta</span><button class="close-btn" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>Organo</label><select id="ms-organo" disabled>${ORGANI.map(o=>`<option ${o===s.organo?'selected':''}>${o}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Tipo</label><select id="ms-tipo"><option ${s.tipo==='ordinaria'?'selected':''}>ordinaria</option><option ${s.tipo==='straordinaria'?'selected':''}>straordinaria</option></select></div>
+        <div class="form-group"><label>Data *</label><input type="date" id="ms-data" value="${s.data}"></div>
+        <div class="form-group"><label>Ora</label><input type="time" id="ms-ora" value="${s.ora?s.ora.slice(0,5):''}"></div>
+        <div class="form-group full"><label>Luogo</label><input type="text" id="ms-luogo" value="${s.luogo||''}"></div>
+        <div class="form-group"><label>Presidente</label><select id="ms-presidente"><option value="">— seleziona —</option>${memOpts}</select></div>
+        <div class="form-group"><label>Segretario</label><select id="ms-segretario"><option value="">— seleziona —</option>${memOptsS}</select></div>
+        <div class="form-group full"><label>Note</label><textarea id="ms-note">${s.note||''}</textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal()">Annulla</button><button class="btn btn-primary" onclick="aggiornaSeduta('${id}')">Salva modifiche</button></div>
+  </div>`);
+  window.aggiornaSeduta=async(sid)=>{
+    const data=document.getElementById('ms-data').value;
+    if(!data){toast('Inserisci la data','error');return;}
+    await sb('sedute','PATCH',{data,ora:document.getElementById('ms-ora').value||null,luogo:document.getElementById('ms-luogo').value||null,tipo:document.getElementById('ms-tipo').value,presidente:document.getElementById('ms-presidente').value||null,segretario:document.getElementById('ms-segretario').value||null,note:document.getElementById('ms-note').value||null},`?id=eq.${sid}`);
+    closeModal();toast('Seduta aggiornata');showDettaglioSeduta(sid);
+  };
+};
+
 // ===== DETTAGLIO SEDUTA =====
-window.showDettaglioSeduta = async (sedutaId) => {
-  const [seduta, presenze, odg, membri] = await Promise.all([
+window.showDettaglioSeduta=async(sedutaId)=>{
+  _currentPage='sedute';
+  setActivePage('sedute');
+  document.getElementById('page-title').textContent='Dettaglio seduta';
+  document.getElementById('topbar-actions').innerHTML=`<button class="btn btn-ghost btn-sm" onclick="showPage('sedute')">← Lista sedute</button><button class="btn btn-secondary btn-sm" onclick="showModificaSeduta('${sedutaId}')">Modifica seduta</button><button class="btn btn-primary btn-sm" onclick="showNuovoPuntoOdg('${sedutaId}')">+ Punto OdG</button>`;
+  document.getElementById('page-content').innerHTML='<div class="loading">Caricamento...</div>';
+  const [seduta,presenze,odg,membri]=await Promise.all([
     sb('sedute','GET',null,`?id=eq.${sedutaId}&select=*`),
     sb('presenze','GET',null,`?seduta_id=eq.${sedutaId}&select=*`),
     sb('punti_odg','GET',null,`?seduta_id=eq.${sedutaId}&select=*&order=numero.asc`),
     sb('membri','GET',null,'?select=*')
   ]);
-  
-  const s = seduta[0];
-  const pres = presenze.filter(p=>p.presente);
-  const ass = presenze.filter(p=>!p.presente);
-  
-  const getMembro = (id) => { const m = membri.find(m=>m.id===id); return m ? `${m.cognome} ${m.nome}` : '—'; };
-  
-  const odgIds = odg.map(o=>`"${o.id}"`).join(',');
-  const delibere = odgIds ? await sb('delibere','GET',null,`?punto_odg_id=in.(${odgIds})&select=*`) : [];
-  
-  showPage('sedute');
-  
-  document.getElementById('page-title').textContent = `Seduta ${s.organo} — ${formatDate(s.data)}`;
-  document.getElementById('topbar-actions').innerHTML = `<button class="btn btn-secondary btn-sm" onclick="showPage('sedute')">← Torna alla lista</button><button class="btn btn-primary btn-sm" onclick="showNuovoPuntoOdg('${s.id}')">+ Aggiungi punto OdG</button>`;
-  
-  document.getElementById('page-content').innerHTML = `
+  const s=seduta[0];
+  const pres=presenze.filter(p=>p.presente);
+  const ass=presenze.filter(p=>!p.presente);
+  const getMembro=(id)=>{const m=membri.find(m=>m.id===id);return m?`${m.cognome} ${m.nome}`:'—';};
+  const oids=odg.map(o=>`"${o.id}"`).join(',');
+  const delibere=oids?await sb('delibere','GET',null,`?punto_odg_id=in.(${oids})&select=*`):[];
+
+  document.getElementById('page-content').innerHTML=`
     <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:20px">
       <div class="card">
         <div class="card-header"><span class="card-title">Informazioni seduta</span>${orgBadge(s.organo)}</div>
         <div class="card-body">
           <div class="form-grid">
-            <div><div class="text-muted" style="margin-bottom:4px">Data e ora</div><strong>${formatDate(s.data)}${s.ora?' · '+s.ora.slice(0,5):''}</strong></div>
-            <div><div class="text-muted" style="margin-bottom:4px">Tipo</div><span class="badge badge-gray">${s.tipo}</span></div>
-            <div><div class="text-muted" style="margin-bottom:4px">Luogo</div><strong>${s.luogo||'—'}</strong></div>
-            <div><div class="text-muted" style="margin-bottom:4px">Tipo</div><span class="badge badge-gray">${s.tipo}</span></div>
-            <div><div class="text-muted" style="margin-bottom:4px">Presidente</div><strong>${s.presidente?getMembro(s.presidente):'—'}</strong></div>
-            <div><div class="text-muted" style="margin-bottom:4px">Segretario</div><strong>${s.segretario?getMembro(s.segretario):'—'}</strong></div>
-            ${s.note?`<div style="grid-column:1/-1"><div class="text-muted" style="margin-bottom:4px">Note</div><p style="font-size:13.5px">${s.note}</p></div>`:''}
+            <div><div class="section-title">Data e ora</div><strong style="font-size:14px">${formatDate(s.data)}${s.ora?' · '+s.ora.slice(0,5):''}</strong></div>
+            <div><div class="section-title">Tipo</div><span class="badge badge-gray">${s.tipo}</span></div>
+            <div><div class="section-title">Luogo</div><strong style="font-size:14px">${s.luogo||'—'}</strong></div>
+            <div><div class="section-title">Quorum</div><strong style="font-size:14px">${pres.length} presenti / ${presenze.length} totali</strong></div>
+            <div><div class="section-title">Presidente</div><strong style="font-size:14px">${s.presidente?getMembro(s.presidente):'—'}</strong></div>
+            <div><div class="section-title">Segretario</div><strong style="font-size:14px">${s.segretario?getMembro(s.segretario):'—'}</strong></div>
+            ${s.note?`<div style="grid-column:1/-1"><div class="section-title">Note</div><p style="font-size:13.5px">${s.note}</p></div>`:''}
           </div>
         </div>
       </div>
       <div class="card">
-        <div class="card-header"><span class="card-title">Presenze</span><span class="badge badge-blue">${pres.length} presenti</span></div>
-        <div class="card-body" style="padding:0">
-          ${pres.map(p=>`<div style="padding:8px 16px;border-bottom:1px solid var(--gray-100);font-size:13px;display:flex;align-items:center;gap:6px"><span style="color:var(--green)">●</span>${getMembro(p.membro_id)}</div>`).join('')}
-          ${ass.map(p=>`<div style="padding:8px 16px;border-bottom:1px solid var(--gray-100);font-size:13px;display:flex;align-items:center;gap:6px;opacity:0.5"><span style="color:var(--gray-400)">○</span>${getMembro(p.membro_id)}</div>`).join('')}
+        <div class="card-header"><span class="card-title">Presenze</span><span class="badge badge-blue">${pres.length}/${presenze.length}</span></div>
+        <div>
+          ${pres.map(p=>`<div style="padding:9px 16px;border-bottom:1px solid var(--gray-100);font-size:13px;display:flex;align-items:center;gap:8px"><span style="color:var(--green);font-weight:700">●</span>${getMembro(p.membro_id)}</div>`).join('')}
+          ${ass.map(p=>`<div style="padding:9px 16px;border-bottom:1px solid var(--gray-100);font-size:13px;display:flex;align-items:center;gap:8px;opacity:0.4"><span style="color:var(--gray-400)">○</span>${getMembro(p.membro_id)}</div>`).join('')}
           ${presenze.length===0?'<div class="text-muted" style="padding:16px">Nessuna presenza registrata</div>':''}
         </div>
       </div>
     </div>
-    
     <div class="card">
-      <div class="card-header">
-        <span class="card-title">Ordine del giorno</span>
-        <button class="btn btn-primary btn-sm" onclick="showNuovoPuntoOdg('${s.id}')">+ Aggiungi punto</button>
-      </div>
+      <div class="card-header"><span class="card-title">Ordine del giorno — ${odg.length} punt${odg.length===1?'o':'i'}</span><button class="btn btn-primary btn-sm" onclick="showNuovoPuntoOdg('${s.id}')">+ Aggiungi punto</button></div>
       <div id="odg-list">
-        ${odg.length === 0 ? '<div class="empty"><p>Nessun punto OdG registrato</p></div>' :
-          odg.map(p => {
-            const del = delibere.filter(d=>d.punto_odg_id===p.id);
-            return `<div class="delibera-row" style="padding:16px 20px">
-              <div class="delibera-num">Punto ${p.numero}</div>
-              <div class="delibera-titolo">${p.titolo}</div>
-              ${p.descrizione?`<div style="font-size:13px;color:var(--gray-600);margin:4px 0">${p.descrizione}</div>`:''}
-              ${p.rinviato_da?`<div style="font-size:12px;color:var(--amber);margin-top:4px">⚠ Rinviato da seduta precedente</div>`:''}
-              <div class="delibera-meta" style="margin-top:10px">
-                ${del.map(d=>`
-                  <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;padding:10px 14px;width:100%;margin-top:8px">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-                      <span style="font-size:12px;font-weight:600;color:var(--gray-600)">Delibera</span>
+        ${odg.length===0?'<div class="empty"><div class="empty-icon">📋</div><p>Nessun punto OdG registrato</p></div>':
+          odg.map(p=>{
+            const del=delibere.filter(d=>d.punto_odg_id===p.id);
+            return `<div class="delibera-row">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start">
+                <div style="flex:1">
+                  <div class="delibera-num">Punto ${p.numero}</div>
+                  <div class="delibera-titolo">${p.titolo}</div>
+                  ${p.descrizione?`<div style="font-size:13px;color:var(--gray-600);margin:4px 0">${p.descrizione}</div>`:''}
+                  ${p.rinviato_da?`<div style="font-size:12px;color:var(--amber);margin-top:4px;font-weight:600">⚠ Rinviato da seduta precedente</div>`:''}
+                </div>
+                <div class="action-row">
+                  <button class="btn btn-ghost btn-sm" onclick="showModificaPuntoOdg('${p.id}','${s.id}')">Modifica</button>
+                  <button class="btn btn-danger btn-sm" onclick="deletePuntoOdg('${p.id}','${s.id}')">✕</button>
+                </div>
+              </div>
+              ${del.map(d=>`
+                <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;padding:12px 16px;margin-top:12px">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                    <span class="section-title">Delibera</span>
+                    <div class="action-row">
                       ${esitoBadge(d.esito)}
+                      <button class="btn btn-ghost btn-sm" onclick="showModificaDelibera('${d.id}','${s.id}')">Modifica</button>
+                      <button class="btn btn-danger btn-sm" onclick="deleteDelibera('${d.id}','${s.id}')">✕</button>
                     </div>
-                    ${d.testo_sintesi?`<div style="font-size:13.5px;margin-bottom:8px">${d.testo_sintesi}</div>`:''}
-                    <div class="voti-bar">
-                      <div class="voto-item"><div class="voto-dot" style="background:var(--green)"></div><span>Fav: ${d.favorevoli}</span></div>
-                      <div class="voto-item"><div class="voto-dot" style="background:var(--red)"></div><span>Contr: ${d.contrari}</span></div>
-                      <div class="voto-item"><div class="voto-dot" style="background:var(--gray-400)"></div><span>Ast: ${d.astenuti}</span></div>
-                    </div>
-                  </div>`).join('')}
-                <button class="btn btn-primary btn-sm" onclick="showNuovaDelibera('${p.id}','${s.id}')">+ Delibera</button>
-                ${p.rinviato_da===null?`<button class="btn btn-secondary btn-sm" onclick="showRinvio('${p.id}','${s.organo}')">Rinvia →</button>`:''}
+                  </div>
+                  ${d.testo_sintesi?`<div style="font-size:13.5px;margin-bottom:10px">${d.testo_sintesi}</div>`:''}
+                  <div class="voti-bar">
+                    <div class="voto-item"><div class="voto-dot" style="background:var(--green)"></div><span>Fav: <strong>${d.favorevoli}</strong></span></div>
+                    <div class="voto-item"><div class="voto-dot" style="background:var(--fs-red)"></div><span>Contr: <strong>${d.contrari}</strong></span></div>
+                    <div class="voto-item"><div class="voto-dot" style="background:var(--gray-400)"></div><span>Ast: <strong>${d.astenuti}</strong></span></div>
+                  </div>
+                </div>`).join('')}
+              <div class="action-row" style="margin-top:12px">
+                <button class="btn btn-primary btn-sm" onclick="showNuovaDelibera('${p.id}','${s.id}')">+ Aggiungi delibera</button>
+                ${!p.rinviato_da?`<button class="btn btn-secondary btn-sm" onclick="showRinvio('${p.id}','${s.organo}')">Rinvia →</button>`:''}
               </div>
             </div>`;
           }).join('')}
       </div>
     </div>`;
+  
+  window.deletePuntoOdg=async(pid,sid)=>{if(!confirm('Eliminare il punto OdG e le delibere collegate?'))return;await sb('punti_odg','DELETE',null,`?id=eq.${pid}`);toast('Punto eliminato');showDettaglioSeduta(sid);};
+  window.deleteDelibera=async(did,sid)=>{if(!confirm('Eliminare questa delibera?'))return;await sb('delibere','DELETE',null,`?id=eq.${did}`);toast('Delibera eliminata');showDettaglioSeduta(sid);};
+};
+
+// ===== MODIFICA PUNTO ODG =====
+window.showModificaPuntoOdg=async(pid,sid)=>{
+  const puntoArr=await sb('punti_odg','GET',null,`?id=eq.${pid}&select=*`);
+  const p=puntoArr[0];
+  openModal(`<div class="modal">
+    <div class="modal-header"><span class="modal-title">Modifica punto OdG</span><button class="close-btn" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>Numero</label><input type="number" id="mp-num" value="${p.numero}" min="1"></div>
+        <div class="form-group full"><label>Titolo *</label><input type="text" id="mp-titolo" value="${p.titolo}"></div>
+        <div class="form-group full"><label>Descrizione</label><textarea id="mp-desc">${p.descrizione||''}</textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal()">Annulla</button><button class="btn btn-primary" onclick="aggiornaPuntoOdg('${pid}','${sid}')">Salva modifiche</button></div>
+  </div>`);
+  window.aggiornaPuntoOdg=async(pid,sid)=>{
+    const titolo=document.getElementById('mp-titolo').value.trim();
+    if(!titolo){toast('Inserisci il titolo','error');return;}
+    await sb('punti_odg','PATCH',{numero:parseInt(document.getElementById('mp-num').value),titolo,descrizione:document.getElementById('mp-desc').value||null},`?id=eq.${pid}`);
+    closeModal();toast('Punto aggiornato');showDettaglioSeduta(sid);
+  };
+};
+
+// ===== MODIFICA DELIBERA =====
+window.showModificaDelibera=async(did,sid)=>{
+  const deliberaArr=await sb('delibere','GET',null,`?id=eq.${did}&select=*`);
+  const d=deliberaArr[0];
+  openModal(`<div class="modal">
+    <div class="modal-header"><span class="modal-title">Modifica delibera</span><button class="close-btn" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Esito *</label>
+          <select id="md-esito">
+            ${['approvata','respinta','rinviata','ritirata'].map(e=>`<option ${d.esito===e?'selected':''}>${e}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group full"><label>Sintesi delibera</label><textarea id="md-sintesi">${d.testo_sintesi||''}</textarea></div>
+        <div class="form-group full"><label>Testo verbatim</label><textarea id="md-verbatim" style="min-height:100px">${d.testo_verbatim||''}</textarea></div>
+        <div class="form-group"><label>Favorevoli</label><input type="number" id="md-fav" value="${d.favorevoli}" min="0"></div>
+        <div class="form-group"><label>Contrari</label><input type="number" id="md-con" value="${d.contrari}" min="0"></div>
+        <div class="form-group"><label>Astenuti</label><input type="number" id="md-ast" value="${d.astenuti}" min="0"></div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal()">Annulla</button><button class="btn btn-primary" onclick="aggiornaDelibera('${did}','${sid}')">Salva modifiche</button></div>
+  </div>`);
+  window.aggiornaDelibera=async(did,sid)=>{
+    await sb('delibere','PATCH',{esito:document.getElementById('md-esito').value,testo_sintesi:document.getElementById('md-sintesi').value||null,testo_verbatim:document.getElementById('md-verbatim').value||null,favorevoli:parseInt(document.getElementById('md-fav').value)||0,contrari:parseInt(document.getElementById('md-con').value)||0,astenuti:parseInt(document.getElementById('md-ast').value)||0},`?id=eq.${did}`);
+    closeModal();toast('Delibera aggiornata');showDettaglioSeduta(sid);
+  };
 };
 
 // ===== NUOVO PUNTO ODG =====
-window.showNuovoPuntoOdg = async (sedutaId) => {
-  const existing = await sb('punti_odg','GET',null,`?seduta_id=eq.${sedutaId}&select=*&order=numero.desc&limit=1`);
-  const nextNum = existing.length > 0 ? existing[0].numero + 1 : 1;
-  
+window.showNuovoPuntoOdg=async(sedutaId)=>{
+  const existing=await sb('punti_odg','GET',null,`?seduta_id=eq.${sedutaId}&select=*&order=numero.desc&limit=1`);
+  const nextNum=existing.length>0?existing[0].numero+1:1;
   openModal(`<div class="modal">
     <div class="modal-header"><span class="modal-title">Nuovo punto OdG</span><button class="close-btn" onclick="closeModal()">✕</button></div>
     <div class="modal-body">
       <div class="form-grid">
         <div class="form-group"><label>Numero</label><input type="number" id="odg-num" value="${nextNum}" min="1"></div>
         <div class="form-group full"><label>Titolo *</label><input type="text" id="odg-titolo" placeholder="Es: Approvazione bilancio 2025"></div>
-        <div class="form-group full"><label>Descrizione</label><textarea id="odg-desc" placeholder="Descrizione dettagliata del punto..."></textarea></div>
+        <div class="form-group full"><label>Descrizione</label><textarea id="odg-desc" placeholder="Descrizione dettagliata..."></textarea></div>
       </div>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="closeModal()">Annulla</button>
-      <button class="btn btn-primary" onclick="salvaPuntoOdg('${sedutaId}')">Salva punto</button>
-    </div>
+    <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal()">Annulla</button><button class="btn btn-primary" onclick="salvaPuntoOdg('${sedutaId}')">Salva punto</button></div>
   </div>`);
-  
-  window.salvaPuntoOdg = async (sid) => {
-    const titolo = document.getElementById('odg-titolo').value.trim();
-    if (!titolo) { toast('Inserisci il titolo','error'); return; }
-    await sb('punti_odg','POST',{
-      seduta_id: sid,
-      numero: parseInt(document.getElementById('odg-num').value),
-      titolo,
-      descrizione: document.getElementById('odg-desc').value || null
-    });
-    closeModal();
-    toast('Punto OdG aggiunto');
-    showDettaglioSeduta(sid);
+  window.salvaPuntoOdg=async(sid)=>{
+    const titolo=document.getElementById('odg-titolo').value.trim();
+    if(!titolo){toast('Inserisci il titolo','error');return;}
+    await sb('punti_odg','POST',{seduta_id:sid,numero:parseInt(document.getElementById('odg-num').value),titolo,descrizione:document.getElementById('odg-desc').value||null});
+    closeModal();toast('Punto OdG aggiunto');showDettaglioSeduta(sid);
   };
 };
 
 // ===== NUOVA DELIBERA =====
-window.showNuovaDelibera = async (puntoId, sedutaId) => {
-  const membri = await sb('membri','GET',null,'?select=*&attivo=eq.true&order=cognome.asc');
-  const seduta = await sb('sedute','GET',null,`?id=eq.${sedutaId}&select=*`);
-  const organo = seduta[0]?.organo;
-  const filteredM = membri.filter(m=>m.organo===organo);
-  
+window.showNuovaDelibera=async(puntoId,sedutaId)=>{
+  const [seduta,membri]=await Promise.all([sb('sedute','GET',null,`?id=eq.${sedutaId}&select=*`),sb('membri','GET',null,'?select=*&attivo=eq.true&order=cognome.asc')]);
+  const organo=seduta[0]?.organo;
+  const filteredM=membri.filter(m=>m.organo===organo);
   openModal(`<div class="modal">
     <div class="modal-header"><span class="modal-title">Nuova delibera</span><button class="close-btn" onclick="closeModal()">✕</button></div>
     <div class="modal-body">
       <div class="form-grid">
-        <div class="form-group full"><label>Esito *</label>
-          <select id="del-esito"><option>approvata</option><option>respinta</option><option>rinviata</option><option>ritirata</option></select>
-        </div>
-        <div class="form-group full"><label>Sintesi delibera</label>
-          <textarea id="del-sintesi" placeholder="Breve sintesi del contenuto della delibera..."></textarea>
-        </div>
-        <div class="form-group full"><label>Testo verbatim</label>
-          <textarea id="del-verbatim" placeholder="Testo integrale come da verbale..." style="min-height:100px"></textarea>
-        </div>
+        <div class="form-group full"><label>Esito *</label><select id="del-esito"><option>approvata</option><option>respinta</option><option>rinviata</option><option>ritirata</option></select></div>
+        <div class="form-group full"><label>Sintesi delibera</label><textarea id="del-sintesi" placeholder="Breve sintesi..."></textarea></div>
+        <div class="form-group full"><label>Testo verbatim</label><textarea id="del-verbatim" placeholder="Testo integrale..." style="min-height:100px"></textarea></div>
         <div class="form-group"><label>Favorevoli</label><input type="number" id="del-fav" value="0" min="0"></div>
         <div class="form-group"><label>Contrari</label><input type="number" id="del-con" value="0" min="0"></div>
         <div class="form-group"><label>Astenuti</label><input type="number" id="del-ast" value="0" min="0"></div>
       </div>
-      ${filteredM.length > 0 ? `
+      ${filteredM.length>0?`
       <div class="divider"></div>
-      <div style="font-size:13px;font-weight:600;margin-bottom:10px">Voto nominale (opzionale)</div>
-      <div id="voti-nominali-grid" style="display:flex;flex-direction:column;gap:6px">
-        ${filteredM.map(m=>`
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border:1px solid var(--gray-200);border-radius:8px">
-            <span style="font-size:13px">${m.cognome} ${m.nome}</span>
-            <select id="voto-${m.id}" style="width:auto;min-width:120px">
-              <option value="">—</option>
-              <option value="favorevole">Favorevole</option>
-              <option value="contrario">Contrario</option>
-              <option value="astenuto">Astenuto</option>
-              <option value="assente">Assente</option>
-            </select>
-          </div>`).join('')}
-      </div>` : ''}
+      <div class="section-title">Voto nominale (opzionale)</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        ${filteredM.map(m=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border:1px solid var(--gray-200);border-radius:6px">
+          <span style="font-size:13px;font-weight:600">${m.cognome} ${m.nome}</span>
+          <select id="voto-${m.id}" style="width:auto;min-width:130px"><option value="">—</option><option value="favorevole">Favorevole</option><option value="contrario">Contrario</option><option value="astenuto">Astenuto</option><option value="assente">Assente</option></select>
+        </div>`).join('')}
+      </div>`:''}
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="closeModal()">Annulla</button>
-      <button class="btn btn-primary" onclick="salvaDelibera('${puntoId}','${sedutaId}')">Salva delibera</button>
-    </div>
+    <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal()">Annulla</button><button class="btn btn-primary" onclick="salvaDelibera('${puntoId}','${sedutaId}')">Salva delibera</button></div>
   </div>`);
-  
-  window.salvaDelibera = async (pid, sid) => {
-    const votiNominali = {};
-    filteredM.forEach(m => {
-      const v = document.getElementById(`voto-${m.id}`)?.value;
-      if (v) votiNominali[m.id] = v;
-    });
-    
-    await sb('delibere','POST',{
-      punto_odg_id: pid,
-      esito: document.getElementById('del-esito').value,
-      testo_sintesi: document.getElementById('del-sintesi').value || null,
-      testo_verbatim: document.getElementById('del-verbatim').value || null,
-      favorevoli: parseInt(document.getElementById('del-fav').value)||0,
-      contrari: parseInt(document.getElementById('del-con').value)||0,
-      astenuti: parseInt(document.getElementById('del-ast').value)||0,
-      voti_nominali: Object.keys(votiNominali).length > 0 ? votiNominali : null
-    });
-    closeModal();
-    toast('Delibera registrata');
-    showDettaglioSeduta(sid);
+  window.salvaDelibera=async(pid,sid)=>{
+    const votiNominali={};
+    filteredM.forEach(m=>{const v=document.getElementById(`voto-${m.id}`)?.value;if(v)votiNominali[m.id]=v;});
+    await sb('delibere','POST',{punto_odg_id:pid,esito:document.getElementById('del-esito').value,testo_sintesi:document.getElementById('del-sintesi').value||null,testo_verbatim:document.getElementById('del-verbatim').value||null,favorevoli:parseInt(document.getElementById('del-fav').value)||0,contrari:parseInt(document.getElementById('del-con').value)||0,astenuti:parseInt(document.getElementById('del-ast').value)||0,voti_nominali:Object.keys(votiNominali).length>0?votiNominali:null});
+    closeModal();toast('Delibera registrata');showDettaglioSeduta(sid);
   };
 };
 
 // ===== RINVIO =====
-window.showRinvio = async (puntoId, organo) => {
-  const sedute = await sb('sedute','GET',null,`?organo=eq.${encodeURIComponent(organo)}&select=*&order=data.asc`);
-  const oggi = new Date().toISOString().split('T')[0];
-  const future = sedute.filter(s=>s.data>=oggi);
-  
+window.showRinvio=async(puntoId,organo)=>{
+  const sedute=await sb('sedute','GET',null,`?organo=eq.${encodeURIComponent(organo)}&select=*&order=data.asc`);
+  const oggi=new Date().toISOString().split('T')[0];
+  const future=sedute.filter(s=>s.data>=oggi);
   openModal(`<div class="modal">
     <div class="modal-header"><span class="modal-title">Rinvia punto OdG</span><button class="close-btn" onclick="closeModal()">✕</button></div>
     <div class="modal-body">
-      <div class="form-group">
-        <label>Rinvia alla seduta *</label>
-        <select id="rin-seduta">
-          <option value="">— seleziona seduta —</option>
-          ${future.map(s=>`<option value="${s.id}">${formatDate(s.data)} — ${s.organo}</option>`).join('')}
-        </select>
+      <div class="form-group"><label>Rinvia alla seduta *</label>
+        <select id="rin-seduta"><option value="">— seleziona —</option>${future.map(s=>`<option value="${s.id}">${formatDate(s.data)} — ${s.organo}</option>`).join('')}</select>
       </div>
-      <div class="form-group mt-16"><label>Motivo rinvio</label>
-        <textarea id="rin-motivo" placeholder="Motivo del rinvio..."></textarea>
-      </div>
-      <div style="margin-top:16px">
-        <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
-          <input type="checkbox" id="rin-nuovopoint"> Crea automaticamente il punto nella nuova seduta
-        </label>
-      </div>
+      <div class="form-group mt-16"><label>Motivo rinvio</label><textarea id="rin-motivo" placeholder="Motivo del rinvio..."></textarea></div>
+      <div style="margin-top:16px"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;letter-spacing:0">
+        <input type="checkbox" id="rin-nuovo"> Crea automaticamente il punto nella nuova seduta
+      </label></div>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="closeModal()">Annulla</button>
-      <button class="btn btn-primary" onclick="salvaRinvio('${puntoId}')">Conferma rinvio</button>
-    </div>
+    <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal()">Annulla</button><button class="btn btn-primary" onclick="salvaRinvio('${puntoId}')">Conferma rinvio</button></div>
   </div>`);
-  
-  window.salvaRinvio = async (pid) => {
-    const newSedId = document.getElementById('rin-seduta').value;
-    if (!newSedId) { toast('Seleziona la seduta','error'); return; }
-    
-    const originalPunto = await sb('punti_odg','GET',null,`?id=eq.${pid}&select=*`);
-    const op = originalPunto[0];
-    
-    let newPuntoId = null;
-    if (document.getElementById('rin-nuovopoint').checked) {
-      const existing = await sb('punti_odg','GET',null,`?seduta_id=eq.${newSedId}&select=*&order=numero.desc&limit=1`);
-      const nextNum = existing.length > 0 ? existing[0].numero + 1 : 1;
-      const np = await sb('punti_odg','POST',{
-        seduta_id: newSedId,
-        numero: nextNum,
-        titolo: op.titolo,
-        descrizione: op.descrizione,
-        rinviato_da: pid
-      });
-      newPuntoId = np[0].id;
+  window.salvaRinvio=async(pid)=>{
+    const newSedId=document.getElementById('rin-seduta').value;
+    if(!newSedId){toast('Seleziona la seduta','error');return;}
+    const op=(await sb('punti_odg','GET',null,`?id=eq.${pid}&select=*`))[0];
+    let newPuntoId=null;
+    if(document.getElementById('rin-nuovo').checked){
+      const existing=await sb('punti_odg','GET',null,`?seduta_id=eq.${newSedId}&select=*&order=numero.desc&limit=1`);
+      const nextNum=existing.length>0?existing[0].numero+1:1;
+      const np=await sb('punti_odg','POST',{seduta_id:newSedId,numero:nextNum,titolo:op.titolo,descrizione:op.descrizione,rinviato_da:pid});
+      newPuntoId=np[0].id;
     }
-    
-    await sb('rinvii','POST',{
-      punto_odg_originale: pid,
-      punto_odg_nuovo: newPuntoId,
-      motivo: document.getElementById('rin-motivo').value || null
-    });
-    
-    closeModal();
-    toast('Rinvio registrato');
+    await sb('rinvii','POST',{punto_odg_originale:pid,punto_odg_nuovo:newPuntoId,motivo:document.getElementById('rin-motivo').value||null});
+    closeModal();toast('Rinvio registrato');
   };
 };
 
 // ===== DELIBERE PAGE =====
 async function renderDelibere() {
-  document.getElementById('topbar-actions').innerHTML = '';
   try {
-    const [delibere, odg, sedute] = await Promise.all([
+    const [delibere,odg,sedute]=await Promise.all([
       sb('delibere','GET',null,'?select=*&order=created_at.desc'),
       sb('punti_odg','GET',null,'?select=*'),
       sb('sedute','GET',null,'?select=*&order=data.desc')
     ]);
-    
-    const anni = [...new Set(sedute.map(s=>s.data.split('-')[0]))].sort().reverse();
-    
-    document.getElementById('page-content').innerHTML = `
+    const anni=[...new Set(sedute.map(s=>s.data.split('-')[0]))].sort().reverse();
+    document.getElementById('page-content').innerHTML=`
       <div class="filter-row">
-        <div class="search-bar">
-          <svg class="search-icon" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" placeholder="Cerca nel testo delle delibere..." id="fd-text" oninput="filterDel()">
-        </div>
-        <select id="fd-organo" onchange="filterDel()">
-          <option value="">Tutti gli organi</option>
-          ${ORGANI.map(o=>`<option>${o}</option>`).join('')}
-        </select>
-        <select id="fd-esito" onchange="filterDel()">
-          <option value="">Tutti gli esiti</option>
-          <option>approvata</option><option>respinta</option><option>rinviata</option><option>ritirata</option>
-        </select>
-        <select id="fd-anno" onchange="filterDel()">
-          <option value="">Tutti gli anni</option>
-          ${anni.map(a=>`<option>${a}</option>`).join('')}
-        </select>
+        <div class="search-bar"><svg class="search-icon" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Cerca nel testo delle delibere..." id="fd-text" oninput="filterDel()"></div>
+        <select id="fd-organo" onchange="filterDel()"><option value="">Tutti gli organi</option>${ORGANI.map(o=>`<option>${o}</option>`).join('')}</select>
+        <select id="fd-esito" onchange="filterDel()"><option value="">Tutti gli esiti</option><option>approvata</option><option>respinta</option><option>rinviata</option><option>ritirata</option></select>
+        <select id="fd-anno" onchange="filterDel()"><option value="">Tutti gli anni</option>${anni.map(a=>`<option>${a}</option>`).join('')}</select>
       </div>
-      <div class="card">
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Data seduta</th><th>Organo</th><th>Punto OdG</th><th>Sintesi delibera</th><th>Esito</th><th>Voti</th></tr></thead>
-            <tbody id="del-tbody"></tbody>
-          </table>
-        </div>
-      </div>`;
-    
-    window._delibere = delibere;
-    window._odg = odg;
-    window._sedute_del = sedute;
-    
-    window.filterDel = () => {
-      const txt = document.getElementById('fd-text')?.value.toLowerCase()||'';
-      const org = document.getElementById('fd-organo')?.value||'';
-      const esito = document.getElementById('fd-esito')?.value||'';
-      const anno = document.getElementById('fd-anno')?.value||'';
-      
-      const filtered = window._delibere.filter(d => {
-        const punto = window._odg.find(o=>o.id===d.punto_odg_id);
-        const seduta = punto ? window._sedute_del.find(s=>s.id===punto.seduta_id) : null;
-        return (!txt || (d.testo_sintesi||'').toLowerCase().includes(txt) || (d.testo_verbatim||'').toLowerCase().includes(txt) || (punto?.titolo||'').toLowerCase().includes(txt)) &&
-          (!org || seduta?.organo === org) &&
-          (!esito || d.esito === esito) &&
-          (!anno || seduta?.data?.startsWith(anno));
+      <div class="card"><div class="table-wrap"><table>
+        <thead><tr><th>Data seduta</th><th>Organo</th><th>Punto OdG</th><th>Sintesi</th><th>Esito</th><th>Voti</th></tr></thead>
+        <tbody id="del-tbody"></tbody>
+      </table></div></div>`;
+    window._delibere=delibere;window._odg=odg;window._sedute_del=sedute;
+    window.filterDel=()=>{
+      const txt=document.getElementById('fd-text')?.value.toLowerCase()||'';
+      const org=document.getElementById('fd-organo')?.value||'';
+      const esito=document.getElementById('fd-esito')?.value||'';
+      const anno=document.getElementById('fd-anno')?.value||'';
+      const filtered=window._delibere.filter(d=>{
+        const punto=window._odg.find(o=>o.id===d.punto_odg_id);
+        const seduta=punto?window._sedute_del.find(s=>s.id===punto.seduta_id):null;
+        return(!txt||(d.testo_sintesi||'').toLowerCase().includes(txt)||(d.testo_verbatim||'').toLowerCase().includes(txt)||(punto?.titolo||'').toLowerCase().includes(txt))&&
+          (!org||seduta?.organo===org)&&(!esito||d.esito===esito)&&(!anno||seduta?.data?.startsWith(anno));
       });
-      
-      const tbody = document.getElementById('del-tbody');
-      if (!tbody) return;
-      if (filtered.length === 0) { tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--gray-400)">Nessuna delibera trovata</td></tr>`; return; }
-      
-      tbody.innerHTML = filtered.map(d => {
-        const punto = window._odg.find(o=>o.id===d.punto_odg_id);
-        const seduta = punto ? window._sedute_del.find(s=>s.id===punto.seduta_id) : null;
+      const tbody=document.getElementById('del-tbody');
+      if(!tbody) return;
+      if(!filtered.length){tbody.innerHTML=`<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--gray-400);font-weight:500">Nessuna delibera trovata</td></tr>`;return;}
+      tbody.innerHTML=filtered.map(d=>{
+        const punto=window._odg.find(o=>o.id===d.punto_odg_id);
+        const seduta=punto?window._sedute_del.find(s=>s.id===punto.seduta_id):null;
         return `<tr>
-          <td>${seduta ? formatDate(seduta.data) : '—'}</td>
-          <td>${seduta ? orgBadge(seduta.organo) : '—'}</td>
-          <td><strong>${punto ? `${punto.numero}. ${punto.titolo}` : '—'}</strong></td>
-          <td style="max-width:280px"><div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${d.testo_sintesi||'<span class="text-muted">—</span>'}</div></td>
+          <td><strong>${seduta?formatDateShort(seduta.data):'—'}</strong></td>
+          <td>${seduta?orgBadge(seduta.organo):'—'}</td>
+          <td style="max-width:220px;font-weight:600;font-size:13px">${punto?`${punto.numero}. ${punto.titolo}`:'—'}</td>
+          <td style="max-width:240px"><div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px">${d.testo_sintesi||'<span class="text-muted">—</span>'}</div></td>
           <td>${esitoBadge(d.esito)}</td>
-          <td>
-            <div class="voti-bar">
-              <span style="color:var(--green);font-size:12px;font-weight:600">✓${d.favorevoli}</span>
-              <span style="color:var(--red);font-size:12px;font-weight:600">✗${d.contrari}</span>
-              <span style="color:var(--gray-400);font-size:12px">~${d.astenuti}</span>
-            </div>
-          </td>
+          <td><div class="voti-bar"><span style="color:var(--green);font-weight:700">✓${d.favorevoli}</span><span style="color:var(--fs-red);font-weight:700">✗${d.contrari}</span><span style="color:var(--gray-400);font-weight:600">~${d.astenuti}</span></div></td>
         </tr>`;
       }).join('');
     };
-    
     filterDel();
-  } catch(e) {
-    document.getElementById('page-content').innerHTML = `<div class="empty"><p>Errore: ${e.message}</p></div>`;
-  }
+  } catch(e){document.getElementById('page-content').innerHTML=`<div class="empty"><p>Errore: ${e.message}</p></div>`;}
 }
 
 // ===== RICERCA =====
 async function renderRicerca() {
-  document.getElementById('page-content').innerHTML = `
+  document.getElementById('page-content').innerHTML=`
     <div class="card" style="margin-bottom:20px">
       <div class="card-body">
-        <div style="font-size:14px;font-weight:600;margin-bottom:12px">Ricerca full-text su delibere e OdG</div>
+        <div class="section-title" style="margin-bottom:12px">Ricerca full-text su delibere e OdG</div>
         <div style="display:flex;gap:12px">
-          <div class="search-bar" style="flex:1">
-            <svg class="search-icon" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" id="search-main" placeholder="Cerca per argomento, parola chiave, consigliere..." onkeydown="if(event.key==='Enter')eseguiRicerca()" style="padding-left:36px">
-          </div>
+          <div class="search-bar" style="flex:1"><svg class="search-icon" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="search-main" placeholder="Cerca per argomento, parola chiave..." onkeydown="if(event.key==='Enter')eseguiRicerca()" style="padding-left:36px"></div>
           <button class="btn btn-primary" onclick="eseguiRicerca()">Cerca</button>
         </div>
       </div>
     </div>
     <div id="search-results"></div>`;
-  
-  window.eseguiRicerca = async () => {
-    const q = document.getElementById('search-main').value.trim().toLowerCase();
-    const res = document.getElementById('search-results');
-    if (!q) return;
-    res.innerHTML = '<div class="loading">Ricerca in corso...</div>';
-    
+  window.eseguiRicerca=async()=>{
+    const q=document.getElementById('search-main').value.trim().toLowerCase();
+    const res=document.getElementById('search-results');
+    if(!q) return;
+    res.innerHTML='<div class="loading">Ricerca in corso...</div>';
     try {
-      const [delibere, odg, sedute] = await Promise.all([
-        sb('delibere','GET',null,'?select=*'),
-        sb('punti_odg','GET',null,'?select=*'),
-        sb('sedute','GET',null,'?select=*')
-      ]);
-      
-      const results = [];
-      delibere.forEach(d => {
-        if ((d.testo_sintesi||'').toLowerCase().includes(q) || (d.testo_verbatim||'').toLowerCase().includes(q)) {
-          const punto = odg.find(o=>o.id===d.punto_odg_id);
-          const seduta = punto ? sedute.find(s=>s.id===punto.seduta_id) : null;
-          results.push({type:'delibera', d, punto, seduta});
-        }
-      });
-      odg.forEach(p => {
-        if (p.titolo.toLowerCase().includes(q) || (p.descrizione||'').toLowerCase().includes(q)) {
-          if (!results.find(r=>r.punto?.id===p.id)) {
-            const seduta = sedute.find(s=>s.id===p.seduta_id);
-            results.push({type:'odg', punto:p, seduta});
-          }
-        }
-      });
-      
-      if (results.length === 0) {
-        res.innerHTML = `<div class="empty"><p>Nessun risultato per "<strong>${q}</strong>"</p></div>`;
-        return;
-      }
-      
-      res.innerHTML = `<div style="font-size:13px;color:var(--gray-600);margin-bottom:12px">${results.length} risultat${results.length===1?'o':'i'} per "<strong>${q}</strong>"</div>
-        <div class="card">
-          ${results.map(r => `
-            <div class="delibera-row" style="padding:16px 20px">
-              <div class="delibera-meta">
-                ${r.seduta ? orgBadge(r.seduta.organo) : ''}
-                ${r.seduta ? `<span class="badge badge-gray">${formatDate(r.seduta.data)}</span>` : ''}
-                ${r.type==='delibera' ? esitoBadge(r.d.esito) : '<span class="badge badge-blue">OdG</span>'}
-              </div>
-              <div class="delibera-titolo" style="margin-top:8px">${r.punto ? `${r.punto.numero}. ${r.punto.titolo}` : '—'}</div>
-              ${r.type==='delibera' && r.d.testo_sintesi ? `<div style="font-size:13px;color:var(--gray-600);margin-top:4px">${r.d.testo_sintesi}</div>` : ''}
-            </div>`).join('')}
-        </div>`;
-    } catch(e) {
-      res.innerHTML = `<div class="empty"><p>Errore: ${e.message}</p></div>`;
-    }
+      const [delibere,odg,sedute]=await Promise.all([sb('delibere','GET',null,'?select=*'),sb('punti_odg','GET',null,'?select=*'),sb('sedute','GET',null,'?select=*')]);
+      const results=[];
+      delibere.forEach(d=>{if((d.testo_sintesi||'').toLowerCase().includes(q)||(d.testo_verbatim||'').toLowerCase().includes(q)){const punto=odg.find(o=>o.id===d.punto_odg_id);const seduta=punto?sedute.find(s=>s.id===punto.seduta_id):null;results.push({type:'delibera',d,punto,seduta});}});
+      odg.forEach(p=>{if(p.titolo.toLowerCase().includes(q)||(p.descrizione||'').toLowerCase().includes(q)){if(!results.find(r=>r.punto?.id===p.id)){const seduta=sedute.find(s=>s.id===p.seduta_id);results.push({type:'odg',punto:p,seduta});}}});
+      if(!results.length){res.innerHTML=`<div class="empty"><div class="empty-icon">🔍</div><p>Nessun risultato per "<strong>${q}</strong>"</p></div>`;return;}
+      res.innerHTML=`<div style="font-size:12px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px">${results.length} risultat${results.length===1?'o':'i'} per "${q}"</div>
+        <div class="card">${results.map(r=>`<div class="delibera-row">
+          <div class="delibera-meta">${r.seduta?orgBadge(r.seduta.organo):''}${r.seduta?`<span class="badge badge-gray">${formatDateShort(r.seduta.data)}</span>`:''}${r.type==='delibera'?esitoBadge(r.d.esito):'<span class="badge badge-blue">OdG</span>'}</div>
+          <div class="delibera-titolo" style="margin-top:8px">${r.punto?`${r.punto.numero}. ${r.punto.titolo}`:'—'}</div>
+          ${r.type==='delibera'&&r.d.testo_sintesi?`<div style="font-size:13px;color:var(--gray-600);margin-top:4px">${r.d.testo_sintesi}</div>`:''}
+          ${r.seduta?`<button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="showDettaglioSeduta('${r.seduta.id}')">Apri seduta →</button>`:''}
+        </div>`).join('')}</div>`;
+    } catch(e){res.innerHTML=`<div class="empty"><p>Errore: ${e.message}</p></div>`;}
   };
 }
 
 // ===== MEMBRI =====
 async function renderMembri() {
-  document.getElementById('topbar-actions').innerHTML = `<button class="btn btn-primary btn-sm" onclick="showNuovoMembro()">+ Nuovo membro</button>`;
-  
+  document.getElementById('topbar-actions').innerHTML=`<button class="btn btn-primary btn-sm" onclick="showNuovoMembro()">+ Nuovo membro</button>`;
   try {
-    const membri = await sb('membri','GET',null,'?select=*&order=cognome.asc');
-    
-    const tabs = ORGANI;
-    let activeTab = tabs[0];
-    
-    const renderTabContent = (org) => {
-      const filtered = membri.filter(m=>m.organo===org);
-      return `
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Cognome</th><th>Nome</th><th>Ruolo</th><th>Stato</th><th>Azioni</th></tr></thead>
-            <tbody>
-              ${filtered.length===0 ? `<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--gray-400)">Nessun membro</td></tr>` :
-                filtered.map(m=>`<tr>
-                  <td><strong>${m.cognome}</strong></td>
-                  <td>${m.nome}</td>
-                  <td>${m.ruolo||'<span class="text-muted">—</span>'}</td>
-                  <td><span class="badge ${m.attivo?'badge-green':'badge-gray'}">${m.attivo?'Attivo':'Inattivo'}</span></td>
-                  <td>
-                    <button class="btn btn-secondary btn-sm" onclick="toggleMembro('${m.id}',${m.attivo})">
-                      ${m.attivo?'Disattiva':'Riattiva'}
-                    </button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteMembro('${m.id}')">Elimina</button>
-                  </td>
-                </tr>`).join('')}
-            </tbody>
-          </table>
-        </div>`;
+    const membri=await sb('membri','GET',null,'?select=*&order=cognome.asc');
+    let activeTab=ORGANI[0];
+    const renderTabContent=(org)=>{
+      const filtered=membri.filter(m=>m.organo===org);
+      return `<div class="table-wrap"><table>
+        <thead><tr><th>Cognome</th><th>Nome</th><th>Ruolo</th><th>Stato</th><th>Azioni</th></tr></thead>
+        <tbody>${!filtered.length?`<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--gray-400);font-weight:500">Nessun membro registrato</td></tr>`:
+          filtered.map(m=>`<tr>
+            <td><strong>${m.cognome}</strong></td><td>${m.nome}</td>
+            <td>${m.ruolo||'<span class="text-muted">—</span>'}</td>
+            <td><span class="badge ${m.attivo?'badge-green':'badge-gray'}">${m.attivo?'Attivo':'Inattivo'}</span></td>
+            <td><div class="action-row">
+              <button class="btn btn-ghost btn-sm" onclick="toggleMembro('${m.id}',${m.attivo})">${m.attivo?'Disattiva':'Riattiva'}</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteMembro('${m.id}')">✕</button>
+            </div></td></tr>`).join('')}
+        </tbody></table></div>`;
     };
-    
-    document.getElementById('page-content').innerHTML = `
+    document.getElementById('page-content').innerHTML=`
       <div class="card">
-        <div class="tabs" id="membri-tabs">
-          ${tabs.map(t=>`<div class="tab ${t===activeTab?'active':''}" onclick="switchMembroTab('${t}')">${t}</div>`).join('')}
-        </div>
+        <div class="tabs" id="membri-tabs">${ORGANI.map(t=>`<div class="tab ${t===activeTab?'active':''}" onclick="switchMembroTab('${t}')">${t}</div>`).join('')}</div>
         <div id="membri-tab-content">${renderTabContent(activeTab)}</div>
       </div>`;
-    
-    window._membri_data = membri;
-    window.switchMembroTab = (org) => {
-      activeTab = org;
-      document.querySelectorAll('#membri-tabs .tab').forEach((t,i)=>t.classList.toggle('active',tabs[i]===org));
-      document.getElementById('membri-tab-content').innerHTML = renderTabContent(org);
-    };
-    window.toggleMembro = async (id, attivo) => {
-      await sb('membri','PATCH',{attivo:!attivo},`?id=eq.${id}`);
-      toast('Stato aggiornato');
-      renderMembri();
-    };
-    window.deleteMembro = async (id) => {
-      if (!confirm('Eliminare questo membro?')) return;
-      await sb('membri','DELETE',null,`?id=eq.${id}`);
-      toast('Membro eliminato');
-      renderMembri();
-    };
-  } catch(e) {
-    document.getElementById('page-content').innerHTML = `<div class="empty"><p>Errore: ${e.message}</p></div>`;
-  }
+    window._membri_data=membri;
+    window.switchMembroTab=(org)=>{activeTab=org;document.querySelectorAll('#membri-tabs .tab').forEach((t,i)=>t.classList.toggle('active',ORGANI[i]===org));document.getElementById('membri-tab-content').innerHTML=renderTabContent(org);};
+    window.toggleMembro=async(id,attivo)=>{await sb('membri','PATCH',{attivo:!attivo},`?id=eq.${id}`);toast('Stato aggiornato');renderMembri();};
+    window.deleteMembro=async(id)=>{if(!confirm('Eliminare questo membro?'))return;await sb('membri','DELETE',null,`?id=eq.${id}`);toast('Membro eliminato');renderMembri();};
+  } catch(e){document.getElementById('page-content').innerHTML=`<div class="empty"><p>Errore: ${e.message}</p></div>`;}
 }
 
-window.showNuovoMembro = () => {
+window.showNuovoMembro=()=>{
   openModal(`<div class="modal">
     <div class="modal-header"><span class="modal-title">Nuovo membro</span><button class="close-btn" onclick="closeModal()">✕</button></div>
     <div class="modal-body">
       <div class="form-grid">
         <div class="form-group"><label>Cognome *</label><input type="text" id="nm-cognome" placeholder="Rossi"></div>
         <div class="form-group"><label>Nome *</label><input type="text" id="nm-nome" placeholder="Mario"></div>
-        <div class="form-group"><label>Organo *</label>
-          <select id="nm-organo">${ORGANI.map(o=>`<option>${o}</option>`).join('')}</select>
-        </div>
+        <div class="form-group"><label>Organo *</label><select id="nm-organo">${ORGANI.map(o=>`<option>${o}</option>`).join('')}</select></div>
         <div class="form-group"><label>Ruolo</label><input type="text" id="nm-ruolo" placeholder="Es: Presidente, Consigliere..."></div>
       </div>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="closeModal()">Annulla</button>
-      <button class="btn btn-primary" onclick="salvaMembro()">Salva membro</button>
-    </div>
+    <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal()">Annulla</button><button class="btn btn-primary" onclick="salvaMembro()">Salva membro</button></div>
   </div>`);
-  
-  window.salvaMembro = async () => {
-    const cognome = document.getElementById('nm-cognome').value.trim();
-    const nome = document.getElementById('nm-nome').value.trim();
-    if (!cognome||!nome) { toast('Inserisci nome e cognome','error'); return; }
-    await sb('membri','POST',{
-      cognome, nome,
-      organo: document.getElementById('nm-organo').value,
-      ruolo: document.getElementById('nm-ruolo').value || null,
-      attivo: true
-    });
-    closeModal();
-    toast('Membro aggiunto');
-    renderMembri();
+  window.salvaMembro=async()=>{
+    const cognome=document.getElementById('nm-cognome').value.trim();
+    const nome=document.getElementById('nm-nome').value.trim();
+    if(!cognome||!nome){toast('Inserisci nome e cognome','error');return;}
+    await sb('membri','POST',{cognome,nome,organo:document.getElementById('nm-organo').value,ruolo:document.getElementById('nm-ruolo').value||null,attivo:true});
+    closeModal();toast('Membro aggiunto');renderMembri();
   };
 };
 
 // ===== REPORT =====
 async function renderReport() {
-  document.getElementById('page-content').innerHTML = `
+  document.getElementById('page-content').innerHTML=`
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-      
       <div class="card">
         <div class="card-header"><span class="card-title">Delibere per organo e periodo</span></div>
         <div class="card-body">
-          <div class="form-group" style="margin-bottom:12px">
-            <label>Organo</label>
-            <select id="rep-organo"><option value="">Tutti</option>${ORGANI.map(o=>`<option>${o}</option>`).join('')}</select>
-          </div>
+          <div class="form-group" style="margin-bottom:12px"><label>Organo</label><select id="rep-organo"><option value="">Tutti</option>${ORGANI.map(o=>`<option>${o}</option>`).join('')}</select></div>
           <div class="form-grid">
             <div class="form-group"><label>Da</label><input type="date" id="rep-from"></div>
             <div class="form-group"><label>A</label><input type="date" id="rep-to"></div>
           </div>
-          <button class="btn btn-primary" style="margin-top:16px;width:100%" onclick="generaReport()">Genera report CSV</button>
+          <button class="btn btn-primary" style="margin-top:16px;width:100%" onclick="generaReport()">Esporta CSV delibere</button>
         </div>
       </div>
-
       <div class="card">
         <div class="card-header"><span class="card-title">Presenze per consigliere</span></div>
         <div class="card-body">
-          <div class="form-group" style="margin-bottom:12px">
-            <label>Organo</label>
-            <select id="rep-org2">${ORGANI.map(o=>`<option>${o}</option>`).join('')}</select>
-          </div>
+          <div class="form-group" style="margin-bottom:12px"><label>Organo</label><select id="rep-org2">${ORGANI.map(o=>`<option>${o}</option>`).join('')}</select></div>
           <div class="form-grid">
             <div class="form-group"><label>Da</label><input type="date" id="rep-from2"></div>
             <div class="form-group"><label>A</label><input type="date" id="rep-to2"></div>
           </div>
-          <button class="btn btn-primary" style="margin-top:16px;width:100%" onclick="generaReportPresenze()">Genera report presenze CSV</button>
+          <button class="btn btn-primary" style="margin-top:16px;width:100%" onclick="generaReportPresenze()">Esporta CSV presenze</button>
         </div>
       </div>
-
       <div class="card" style="grid-column:1/-1">
-        <div class="card-header"><span class="card-title">Storico delibere per argomento</span></div>
+        <div class="card-header"><span class="card-title">Storico per argomento</span></div>
         <div class="card-body">
           <div style="display:flex;gap:12px">
             <input type="text" id="rep-keyword" placeholder="Es: bilancio, immobili, nomine..." style="flex:1">
@@ -1235,108 +964,63 @@ async function renderReport() {
           </div>
         </div>
       </div>
-    </div>
-    <div id="report-preview" style="margin-top:20px"></div>`;
+    </div>`;
 
-  window.generaReport = async () => {
-    const organo = document.getElementById('rep-organo').value;
-    const from = document.getElementById('rep-from').value;
-    const to = document.getElementById('rep-to').value;
-    
-    let params = '?select=*';
-    if (organo) params += `&organo=eq.${encodeURIComponent(organo)}`;
-    if (from) params += `&data=gte.${from}`;
-    if (to) params += `&data=lte.${to}`;
-    
-    const sedute = await sb('sedute','GET',null,params);
-    if (sedute.length===0) { toast('Nessuna seduta trovata','error'); return; }
-    
-    const sids = sedute.map(s=>`"${s.id}"`).join(',');
-    const odg = await sb('punti_odg','GET',null,`?seduta_id=in.(${sids})&select=*`);
-    const oids = odg.map(o=>`"${o.id}"`).join(',');
-    const delibere = oids ? await sb('delibere','GET',null,`?punto_odg_id=in.(${oids})&select=*`) : [];
-    
-    const rows = [['Data','Organo','Tipo','Punto n.','Titolo OdG','Esito','Favorevoli','Contrari','Astenuti','Sintesi']];
-    odg.forEach(p => {
-      const sed = sedute.find(s=>s.id===p.seduta_id);
-      const dels = delibere.filter(d=>d.punto_odg_id===p.id);
-      if (dels.length===0) {
-        rows.push([sed?.data||'',sed?.organo||'',sed?.tipo||'',p.numero,p.titolo,'—','','','','']);
-      } else {
-        dels.forEach(d => {
-          rows.push([sed?.data||'',sed?.organo||'',sed?.tipo||'',p.numero,p.titolo,d.esito,d.favorevoli,d.contrari,d.astenuti,d.testo_sintesi||'']);
-        });
-      }
-    });
-    
-    downloadCSV(rows, `delibere_${organo||'tutti'}_${from||'inizio'}_${to||'oggi'}.csv`);
-    toast('CSV scaricato');
-  };
-  
-  window.generaReportPresenze = async () => {
-    const organo = document.getElementById('rep-org2').value;
-    const from = document.getElementById('rep-from2').value;
-    const to = document.getElementById('rep-to2').value;
-    
-    let params = `?organo=eq.${encodeURIComponent(organo)}`;
-    if (from) params += `&data=gte.${from}`;
-    if (to) params += `&data=lte.${to}`;
-    
-    const sedute = await sb('sedute','GET',null,params+'&select=*');
-    const membri = await sb('membri','GET',null,`?organo=eq.${encodeURIComponent(organo)}&select=*`);
-    const sids = sedute.map(s=>`"${s.id}"`).join(',');
-    const presenze = sids ? await sb('presenze','GET',null,`?seduta_id=in.(${sids})&select=*`) : [];
-    
-    const rows = [['Cognome','Nome','Ruolo','Sedute totali','Presenze','Assenze','% Presenze']];
-    membri.forEach(m => {
-      const myPres = presenze.filter(p=>p.membro_id===m.id);
-      const pCount = myPres.filter(p=>p.presente).length;
-      const tot = myPres.length;
-      rows.push([m.cognome,m.nome,m.ruolo||'',tot,pCount,tot-pCount,tot>0?Math.round(pCount/tot*100)+'%':'—']);
-    });
-    
-    downloadCSV(rows, `presenze_${organo}.csv`);
-    toast('CSV presenze scaricato');
-  };
-  
-  window.generaReportArgomento = async () => {
-    const kw = document.getElementById('rep-keyword').value.trim().toLowerCase();
-    if (!kw) { toast('Inserisci una parola chiave','error'); return; }
-    
-    const [delibere, odg, sedute] = await Promise.all([
-      sb('delibere','GET',null,'?select=*'),
-      sb('punti_odg','GET',null,'?select=*'),
-      sb('sedute','GET',null,'?select=*')
-    ]);
-    
-    const matches = delibere.filter(d =>
-      (d.testo_sintesi||'').toLowerCase().includes(kw) ||
-      (d.testo_verbatim||'').toLowerCase().includes(kw) ||
-      (odg.find(o=>o.id===d.punto_odg_id)?.titolo||'').toLowerCase().includes(kw)
+  window.generaReport=async()=>{
+    const organo=document.getElementById('rep-organo').value;
+    const from=document.getElementById('rep-from').value;
+    const to=document.getElementById('rep-to').value;
+    let params='?select=*';
+    if(organo) params+=`&organo=eq.${encodeURIComponent(organo)}`;
+    if(from) params+=`&data=gte.${from}`;
+    if(to) params+=`&data=lte.${to}`;
+    const sedute=await sb('sedute','GET',null,params);
+    if(!sedute.length){toast('Nessuna seduta trovata','error');return;}
+    const sids=sedute.map(s=>`"${s.id}"`).join(',');
+    const odg=await sb('punti_odg','GET',null,`?seduta_id=in.(${sids})&select=*`);
+    const oids=odg.map(o=>`"${o.id}"`).join(',');
+    const delibere=oids?await sb('delibere','GET',null,`?punto_odg_id=in.(${oids})&select=*`):[];
+    const rows=[['Data','Organo','Tipo','Punto n.','Titolo OdG','Esito','Favorevoli','Contrari','Astenuti','Sintesi']];
+    odg.forEach(p=>{const sed=sedute.find(s=>s.id===p.seduta_id);const dels=delibere.filter(d=>d.punto_odg_id===p.id);
+      if(!dels.length){rows.push([sed?.data||'',sed?.organo||'',sed?.tipo||'',p.numero,p.titolo,'—','','','','']);}
+      else{dels.forEach(d=>rows.push([sed?.data||'',sed?.organo||'',sed?.tipo||'',p.numero,p.titolo,d.esito,d.favorevoli,d.contrari,d.astenuti,d.testo_sintesi||'']));}}
     );
-    
-    const rows = [['Data','Organo','Punto n.','Titolo OdG','Esito','Favorevoli','Contrari','Astenuti','Sintesi']];
-    matches.forEach(d => {
-      const punto = odg.find(o=>o.id===d.punto_odg_id);
-      const sed = punto ? sedute.find(s=>s.id===punto.seduta_id) : null;
-      rows.push([sed?.data||'',sed?.organo||'',punto?.numero||'',punto?.titolo||'',d.esito,d.favorevoli,d.contrari,d.astenuti,d.testo_sintesi||'']);
-    });
-    
-    downloadCSV(rows, `delibere_argomento_${kw}.csv`);
-    toast(`CSV con ${matches.length} risultati scaricato`);
+    downloadCSV(rows,`delibere_${organo||'tutti'}.csv`);toast('CSV scaricato');
+  };
+
+  window.generaReportPresenze=async()=>{
+    const organo=document.getElementById('rep-org2').value;
+    const from=document.getElementById('rep-from2').value;
+    const to=document.getElementById('rep-to2').value;
+    let params=`?organo=eq.${encodeURIComponent(organo)}`;
+    if(from) params+=`&data=gte.${from}`;
+    if(to) params+=`&data=lte.${to}`;
+    const sedute=await sb('sedute','GET',null,params+'&select=*');
+    const membri=await sb('membri','GET',null,`?organo=eq.${encodeURIComponent(organo)}&select=*`);
+    const sids=sedute.map(s=>`"${s.id}"`).join(',');
+    const presenze=sids?await sb('presenze','GET',null,`?seduta_id=in.(${sids})&select=*`):[];
+    const rows=[['Cognome','Nome','Ruolo','Sedute totali','Presenze','Assenze','% Presenze']];
+    membri.forEach(m=>{const mp=presenze.filter(p=>p.membro_id===m.id);const pc=mp.filter(p=>p.presente).length;const tot=mp.length;rows.push([m.cognome,m.nome,m.ruolo||'',tot,pc,tot-pc,tot>0?Math.round(pc/tot*100)+'%':'—']);});
+    downloadCSV(rows,`presenze_${organo}.csv`);toast('CSV presenze scaricato');
+  };
+
+  window.generaReportArgomento=async()=>{
+    const kw=document.getElementById('rep-keyword').value.trim().toLowerCase();
+    if(!kw){toast('Inserisci una parola chiave','error');return;}
+    const [delibere,odg,sedute]=await Promise.all([sb('delibere','GET',null,'?select=*'),sb('punti_odg','GET',null,'?select=*'),sb('sedute','GET',null,'?select=*')]);
+    const matches=delibere.filter(d=>(d.testo_sintesi||'').toLowerCase().includes(kw)||(d.testo_verbatim||'').toLowerCase().includes(kw)||(odg.find(o=>o.id===d.punto_odg_id)?.titolo||'').toLowerCase().includes(kw));
+    const rows=[['Data','Organo','Punto n.','Titolo OdG','Esito','Favorevoli','Contrari','Astenuti','Sintesi']];
+    matches.forEach(d=>{const punto=odg.find(o=>o.id===d.punto_odg_id);const sed=punto?sedute.find(s=>s.id===punto.seduta_id):null;rows.push([sed?.data||'',sed?.organo||'',punto?.numero||'',punto?.titolo||'',d.esito,d.favorevoli,d.contrari,d.astenuti,d.testo_sintesi||'']);});
+    downloadCSV(rows,`delibere_${kw}.csv`);toast(`CSV con ${matches.length} risultati`);
   };
 }
 
-function downloadCSV(rows, filename) {
-  const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
-  const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = filename;
-  a.click();
+function downloadCSV(rows,filename) {
+  const csv=rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();
 }
 
-// INIT
 showPage('dashboard');
 </script>
 </body>
